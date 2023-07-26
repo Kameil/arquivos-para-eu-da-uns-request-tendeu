@@ -14,7 +14,7 @@ user_token = os.environ['user_token']
 catch_id = os.environ['catch_id']
 catch_id2 = os.environ['catch_id2']
 catch_id3 = os.environ['catch_id3']
-ping = os.environ['catch_id3']
+ping = os.environ['captcha_ping']
 # id para quando aparecer captcha pingar netlgd
 # user id to be pinged when captcha appears 
 # coloque seu id ai no ping!!!
