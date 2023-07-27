@@ -428,6 +428,6 @@ async def sexo(ctx):
 
 
 keep_alive.keep_alive()
-print(colored(f'Pokétwo Autocacth.\n\nsò mitada violenta versão :{version}\n\nEvent Log:', 'green'))
+print(colored(f'Pokétwo Autocacther.\n\nsò mitada violenta versão :{version}\n\nEvent Log:', 'green'))
 print(colored(f'o prefix do autocatch é "{prefix}".', 'yellow'))
 client.run(f"{user_token}")
