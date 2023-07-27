@@ -1,11 +1,4 @@
-import re
-import os
-import asyncio
-import random
-import string
-import keep_alive
-import random
-import termcolor
+import re, os, asyncio, random, string, keep_alive, random, termcolor
 from discord.ext import commands, tasks
 from termcolor import colored
 version = 'v1.1.1'
