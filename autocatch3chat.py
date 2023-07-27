@@ -42,7 +42,7 @@ shiny3 = 0
 legendary3 = 0
 mythical3 = 0
 
-prefix = "|||"
+prefix = os.environ['captcha_ping']
 # prefixo é ai agora belesinha
 
 poketwo = 716390085896962058
