@@ -8,10 +8,6 @@ catch_id = os.environ['catch_id']
 catch_id2 = os.environ['catch_id2']
 catch_id3 = os.environ['catch_id3']
 ping = os.environ['captcha_ping']
-# id para quando aparecer captcha pingar netlgd
-# user id to be pinged when captcha appears 
-# coloque seu id ai no ping!!!
-
 with open('data/pokemon', 'r', encoding='utf8') as file:
     pokemon_list = file.read()
 with open('data/legendary', 'r') as file:
@@ -20,8 +16,6 @@ with open('data/mythical', 'r') as file:
     mythical_list = file.read()
 with open('data/level', 'r') as file:
     to_level = file.readline()
-  
-
 num_pokemon = 0
 shiny = 0
 legendary = 0
@@ -34,7 +28,6 @@ num_pokemon3 = 0
 shiny3 = 0
 legendary3 = 0
 mythical3 = 0
-
 prefix = os.environ['prefix']
 # prefixo é ai agora belesinha
 
