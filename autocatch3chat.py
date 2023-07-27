@@ -1,7 +1,7 @@
 import re, os, asyncio, random, string, keep_alive, random, termcolor
 from discord.ext import commands, tasks
 from termcolor import colored
-version = 'v1.1.1'
+version = 'v1.2.1'
 
 user_token = os.environ['user_token']
 catch_id = os.environ['catch_id']
@@ -424,7 +424,7 @@ async def stop(ctx):
 async def sexo(ctx):
   await ctx.send('sexo')
 
-print(colored(f'Pokétwo Autocacth.\n\nsò mitada violenta\n\nEvent Log:', 'green'))
+print(colored(f'Pokétwo Autocacth.\n\nsò mitada violenta versão :{version}\n\nEvent Log:', 'green'))
 print(colored(f'o prefix do autocatch é "{prefix}".', 'yellow'))
 keep_alive.keep_alive()
 client.run(f"{user_token}")
