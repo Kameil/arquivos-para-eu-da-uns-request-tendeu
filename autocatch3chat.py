@@ -473,6 +473,9 @@ async def stop(ctx):
     else:
         if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)]:
             await ctx.send('Bot is already stopped.')
+@client.command()
+async def sexo(ctx):
+  await ctx.send('sexo')
 
 print(colored(f'Pokétwo Autocacther. o autocatch ira marca o id: \n{ping}\n Se nao for você, por favor, alterene na linha `16` do codigo, na variavel "ping".\nEvent Log:', 'green'))
 print(colored(f'o prefix do autocatch é "{prefix}".', 'yellow'))
