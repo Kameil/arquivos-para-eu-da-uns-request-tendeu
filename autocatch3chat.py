@@ -407,10 +407,10 @@ async def start(ctx):
     if paused:
         if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)]:
             paused = False
-            await ctx.send('Bot started.')
+            await ctx.send('Bot iniciado.')
         else:
             if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)]:
-                await ctx.send('Bot is already running.')
+                await ctx.send('Bot já está em execução.')
 
 @client.command()
 async def stop(ctx):
@@ -418,19 +418,18 @@ async def stop(ctx):
     if not paused:
         if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)]:
             paused = True
-            await ctx.send('Bot stopped.')
+            await ctx.send('Bot pausado com sucesso.')
     else:
         if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)]:
-            await ctx.send('Bot is already stopped.')
+            await ctx.send('Bot já está Pausado.')
 @client.command()
 async def sexo(ctx):
   await ctx.send('sexo')
 
-def sexoc():
-  asyncio.sleep(2)
-  print(colored(f'Pokétwo Autocacther.\n\nsò mitada violenta versão :{version}\n\nEvent Log:', 'green'))
-  print(colored(f'o prefix do autocatch é "{prefix}".', 'yellow'))
+
+  
 
 keep_alive.keep_alive()
-sexoc()
+print(colored(f'Pokétwo Autocacther.\n\nsò mitada violenta versão :{version}\n\nEvent Log:', 'green'))
+print(colored(f'o prefix do autocatch é "{prefix}".', 'yellow'))
 client.run(f"{user_token}")
