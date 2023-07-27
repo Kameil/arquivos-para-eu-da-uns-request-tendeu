@@ -426,7 +426,8 @@ async def stop(ctx):
 async def sexo(ctx):
   await ctx.send('sexo')
 
+
+keep_alive.keep_alive()
 print(colored(f'Pokétwo Autocacth.\n\nsò mitada violenta versão :{version}\n\nEvent Log:', 'green'))
 print(colored(f'o prefix do autocatch é "{prefix}".', 'yellow'))
-keep_alive.keep_alive()
 client.run(f"{user_token}")
