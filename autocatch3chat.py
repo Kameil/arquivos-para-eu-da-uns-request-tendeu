@@ -1,7 +1,7 @@
 import re, os, asyncio, random, string, keep_alive, random, termcolor
 from discord.ext import commands, tasks
 from termcolor import colored
-version = 'v1.2.1'
+version = 'v1.2.5'
 
 user_token = os.environ['user_token']
 catch_id = os.environ['catch_id']
@@ -44,6 +44,8 @@ paused = False
 @client.event
 async def on_ready():
     print(f'Logged into account: {client.user.name}')
+    channel = client.get_channel(int(catch_id))
+    await channel.send('autocatch online.')
 @client.event
 async def on_message(message):
     global paused
