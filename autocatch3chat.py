@@ -427,7 +427,7 @@ async def sexo(ctx):
   await ctx.send('sexo')
 
 def sexoc():
-  await asyncio.sleep(2)
+  await asyncio.sleep(1)
   print(colored(f'Pokétwo Autocacther.\n\nsò mitada violenta versão :{version}\n\nEvent Log:', 'green'))
   print(colored(f'o prefix do autocatch é "{prefix}".', 'yellow'))
 
