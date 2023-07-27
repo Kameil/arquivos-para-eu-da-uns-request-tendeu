@@ -20,16 +20,7 @@ num_pokemon = 0
 shiny = 0
 legendary = 0
 mythical = 0
-num_pokemon2 = 0
-shiny2 = 0
-legendary2 = 0
-mythical2 = 0
-num_pokemon3 = 0
-shiny3 = 0
-legendary3 = 0
-mythical3 = 0
 prefix = os.environ['prefix']
-# prefixo é ai agora belesinha
 
 poketwo = 716390085896962058
 client = commands.Bot(command_prefix=f'{prefix}')
@@ -69,18 +60,6 @@ async def on_message(message):
                         await typing_channel.trigger_typing()
                         await asyncio.sleep(timesleep)
                         await message.channel.send('<@716390085896962058> h')
-                elif "Congratulations" in embed_title:
-                    embed_content = message.embeds[0].description
-                    if 'now level' in embed_content:
-                        split = embed_content.split(' ')
-                        a = embed_content.count(' ')
-                        level = int(split[a].replace('!', ''))
-                        if level == 100:
-                            await message.channel.send(f".s {to_level}")
-                            with open('data/level', 'r') as fi:
-                                data = fi.read().splitlines(True)
-                            with open('data/level', 'w') as fo:
-                                fo.writelines(data[1:])
             else:
                 content = message.content
                 if 'The pokémon is ' in content:
@@ -196,18 +175,6 @@ async def on_message(message):
                         await typing_channel.trigger_typing()
                         await asyncio.sleep(timesleep)
                         await message.channel.send('<@716390085896962058> h')
-                elif "Congratulations" in embed_title:
-                    embed_content = message.embeds[0].description
-                    if 'now level' in embed_content:
-                        split = embed_content.split(' ')
-                        a = embed_content.count(' ')
-                        level = int(split[a].replace('!', ''))
-                        if level == 100:
-                            await message.channel.send(f".s {to_level}")
-                            with open('data/level', 'r') as fi:
-                                data = fi.read().splitlines(True)
-                            with open('data/level', 'w') as fo:
-                                fo.writelines(data[1:])
             else:
                 content = message.content
                 if 'The pokémon is ' in content:
@@ -230,10 +197,6 @@ async def on_message(message):
                         await asyncio.sleep(1)
 
                 elif 'Congratulations' in content:
-                    global shiny2
-                    global legendary2
-                    global num_pokemon2
-                    global mythical2
                     num_pokemon += 1
                     split = content.split(' ')
                     pokemon = split[7].replace('!', '')
@@ -258,7 +221,7 @@ async def on_message(message):
                         await asyncio.sleep(timesleep)
                         await message.channel.send('<@716390085896962058> i l')
                     if 'seem unusual...' in content:
-                        shiny2 += 1
+                        shiny += 1
                         print(f'Shiny Pokémon caught! Pokémon: {pokemon}')
                         print(f'Shiny: {shiny} | Legendary: {legendary} | Mythical: {mythical}')
                         timesleep = random.uniform(0.5, 1.5)
@@ -267,7 +230,7 @@ async def on_message(message):
                         await asyncio.sleep(timesleep)
                         await message.channel.send('<@716390085896962058> i l')
                     elif re.findall('^' + pokemon + '$', legendary_list, re.MULTILINE):
-                        legendary2 += 1
+                        legendary += 1
                         print(f'Legendary Pokémon caught! Pokémon: {pokemon}')
                         print(f'Shiny: {shiny} | Legendary: {legendary} | Mythical: {mythical}')
                         timesleep = random.uniform(0.8, 1.5)
@@ -276,7 +239,7 @@ async def on_message(message):
                         await asyncio.sleep(timesleep)
                         await message.channel.send('<@716390085896962058> i l')
                     elif re.findall('^' + pokemon + '$', mythical_list, re.MULTILINE):
-                        mythical2 += 1
+                        mythical += 1
                         print(f'Mythical Pokémon caught! Pokémon: {pokemon}')
                         print(f'Shiny: {shiny} | Legendary: {legendary} | Mythical: {mythical}')
                         timesleep = random.uniform(0.5, 1.5)
@@ -323,18 +286,6 @@ async def on_message(message):
                         await typing_channel.trigger_typing()
                         await asyncio.sleep(timesleep)
                         await message.channel.send('<@716390085896962058> h')
-                elif "Congratulations" in embed_title:
-                    embed_content = message.embeds[0].description
-                    if 'now level' in embed_content:
-                        split = embed_content.split(' ')
-                        a = embed_content.count(' ')
-                        level = int(split[a].replace('!', ''))
-                        if level == 100:
-                            await message.channel.send(f".s {to_level}")
-                            with open('data/level', 'r') as fi:
-                                data = fi.read().splitlines(True)
-                            with open('data/level', 'w') as fo:
-                                fo.writelines(data[1:])
             else:
                 content = message.content
                 if 'The pokémon is ' in content:
@@ -357,10 +308,6 @@ async def on_message(message):
                         await asyncio.sleep(1)
 
                 elif 'Congratulations' in content:
-                    global shiny3
-                    global legendary3
-                    global num_pokemon3
-                    global mythical3
                     num_pokemon += 1
                     split = content.split(' ')
                     pokemon = split[7].replace('!', '')
@@ -385,7 +332,7 @@ async def on_message(message):
                         await asyncio.sleep(timesleep)
                         await message.channel.send('<@716390085896962058> i l')
                     if 'seem unusual...' in content:
-                        shiny3 += 1
+                        shiny += 1
                         print(f'Shiny Pokémon caught! Pokémon: {pokemon}')
                         print(f'Shiny: {shiny} | Legendary: {legendary} | Mythical: {mythical}')
                         timesleep = random.uniform(0.5, 1.5)
@@ -394,7 +341,7 @@ async def on_message(message):
                         await asyncio.sleep(timesleep)
                         await message.channel.send('<@716390085896962058> i l')
                     elif re.findall('^' + pokemon + '$', legendary_list, re.MULTILINE):
-                        legendary3 += 1
+                        legendary += 1
                         print(f'Legendary Pokémon caught! Pokémon: {pokemon}')
                         print(f'Shiny: {shiny} | Legendary: {legendary} | Mythical: {mythical}')
                         timesleep = random.uniform(0.8, 1.5)
@@ -403,7 +350,7 @@ async def on_message(message):
                         await asyncio.sleep(timesleep)
                         await message.channel.send('<@716390085896962058> i l')
                     elif re.findall('^' + pokemon + '$', mythical_list, re.MULTILINE):
-                        mythical3 += 1
+                        mythical += 1
                         print(f'Mythical Pokémon caught! Pokémon: {pokemon}')
                         print(f'Shiny: {shiny} | Legendary: {legendary} | Mythical: {mythical}')
                         timesleep = random.uniform(0.5, 1.5)
