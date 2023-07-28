@@ -1,5 +1,6 @@
 import re, os, asyncio, random, string, keep_alive, random
 from discord.ext import commands, tasks
+from termcolor import colored
 
 pokeone = 473020399060385792
 prefixo = os.environ['prefix']
