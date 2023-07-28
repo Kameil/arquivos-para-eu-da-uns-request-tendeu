@@ -61,6 +61,6 @@ async def parar():
 
 async def iniciar():
     analize_loop.start()
-
+print(colored(f'Bot iniciado com sucesso •\nCom prefixo: {prefixo}', 'green'))
 keep_alive.keep_alive()
 client.run(f"{token}")
