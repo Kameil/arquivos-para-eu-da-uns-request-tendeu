@@ -1,7 +1,7 @@
 import re, os, asyncio, random, string, keep_alive, random, termcolor
 from discord.ext import commands, tasks
 from termcolor import colored
-version = 'v1.3.5'
+version = 'v1.4.0'
 
 user_token = os.environ['user_token']
 catch_id = os.environ['catch_id']
@@ -421,7 +421,7 @@ async def say(ctx, *, args):
     if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)]:
         await ctx.send(args)
       
-@client.command(name='iniciar', aliases=['start'])
+@client.command(name='ligar', aliases=['start'])
 async def start_cmd(ctx):
     global paused
     if paused:
@@ -432,7 +432,7 @@ async def start_cmd(ctx):
             if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)]:
                 await ctx.send('Bot já está em execução.')
 
-@client.command(name='parar', aliases=['stop'])
+@client.command(name='pausar', aliases=['stop'])
 async def stop_cmd(ctx):
     global paused
     if not paused:
@@ -447,7 +447,7 @@ async def stop_cmd(ctx):
 async def ajuda_cmd(ctx):
     global help_command
     if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)] and help_command == 1:
-        await ctx.send(f'```\n**lista de comandos**\nstart/iniciar  •  usado para iniciar o bot\nstop/parar  •  usado para parar o bot.\nsay/echo/falar  -  usado para controlar o bot atravez de outros lugares\n```')
+        await ctx.send(f'```\n**lista de comandos**\nstart/ligar  •  usado para iniciar o bot\nstop/pausar  •  usado para parar o bot.\nsay/echo/falar  •  usado para controlar o bot atravez de outras contas.\n```')
         help_command += 1
     else:
         if help_command == 2:
