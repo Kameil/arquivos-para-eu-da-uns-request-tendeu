@@ -1,7 +1,7 @@
 import re, os, asyncio, random, string, keep_alive, random, termcolor
 from discord.ext import commands, tasks
 from termcolor import colored
-version = 'v1.3.6'
+version = 'v1.3.7'
 
 user_token = os.environ['user_token']
 catch_id = os.environ['catch_id']
@@ -440,21 +440,6 @@ async def ajuda_cmd(ctx):
             if help_command == 3:
                 print('ih ala tentou usar o help')
                 help_command += 1
-
-async def help(ctx):
-    global help_command
-    if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)] and help_command == 1:
-        await ctx.send(f'```\n**lista de comandos**\n{prefix}start  •  usado para iniciar o bot\n{prefix}stop  •  usado para parar o bot.\nem-breve novos comandos.')
-        help_command += 1
-    else:
-        if help_command == 2:
-            await ctx.send('O comando **help** só pode ser utilizado uma vez a cada vez que voce inicia o bot.')
-            help_command += 1
-        else:
-            if help_command == 3:
-                print('ih ala tentou usar o help')
-                help_command += 1
-  
 
 keep_alive.keep_alive()
 print(colored(f'Pokétwo Autocacther.\n\nsò mitada violenta versão :{version}\n\nEvent Log:', 'green'))
