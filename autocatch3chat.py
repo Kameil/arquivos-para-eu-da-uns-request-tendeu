@@ -440,8 +440,7 @@ async def ajuda_cmd(ctx):
             if help_command == 3:
                 print('ih ala tentou usar o help')
                 help_command += 1
-
-  
+# somitadaviolenta 
 
 keep_alive.keep_alive()
 print(colored(f'Pokétwo Autocacther.\n\nsò mitada violenta versão :{version}\n\nEvent Log:', 'green'))
