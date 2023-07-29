@@ -1,7 +1,7 @@
 import re, os, asyncio, random, string, keep_alive, random, termcolor
 from discord.ext import commands, tasks
 from termcolor import colored
-version = 'v1.3.8'
+version = 'v1.3.5'
 
 user_token = os.environ['user_token']
 catch_id = os.environ['catch_id']
@@ -440,9 +440,10 @@ async def ajuda_cmd(ctx):
             if help_command == 3:
                 print('ih ala tentou usar o help')
                 help_command += 1
-# somitadaviolenta 
+
+  
 
 keep_alive.keep_alive()
 print(colored(f'Pokétwo Autocacther.\n\nsò mitada violenta versão :{version}\n\nEvent Log:', 'green'))
-print(colored(f'o prefix do autocatch é "{prefix}".', 'yellow'), colored(f'use {prefix}ajuda para ver a lista de commandos', 'purple'))
+print(colored(f'o prefix do autocatch é "{prefix}".\n\nuse {prefix}ajuda para ver a lista de comandos.', 'yellow'))
 client.run(f"{user_token}")
