@@ -399,12 +399,12 @@ async def on_message(message):
     if not message.author.bot:
         await client.process_commands(message)
 
-@client.command(name='falar', aliases['echo', 'say'])
+@client.command(name='falar', aliases=['echo', 'say'])
 async def say(ctx, *, args):
     if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)]:
         await ctx.send(args)
       
-@client.command(name='iniciar', aliases['start'])
+@client.command(name='iniciar', aliases=['start'])
 async def start_cmd(ctx):
     global paused
     if paused:
@@ -426,7 +426,7 @@ async def stop_cmd(ctx):
         if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)]:
             await ctx.send('Bot já está Pausado.')
             
-@client.command(name='ajuda', aliases['ajud', 'aju', 'aj', 'a'])
+@client.command(name='ajuda', aliases=['ajud', 'aju', 'aj', 'a'])
 async def ajuda_cmd(ctx):
     global help_command
     if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)] and help_command == 1:
