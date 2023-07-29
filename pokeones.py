@@ -2,6 +2,7 @@ import re, os, asyncio, random, string, keep_alive, random
 from discord.ext import commands, tasks
 from termcolor import colored
 
+versao = '1.1.2'
 pokeone = 473020399060385792
 prefixo = os.environ['prefix']
 paused = False
@@ -62,6 +63,6 @@ async def parar():
 
 async def iniciar():
     analize_loop.start()
-print(colored(f'Bot iniciado com sucesso •\nCom prefixo: {prefixo}', 'green'))
+print(colored(f'Bot iniciado com sucesso •\nCom prefixo: {prefixo}\n versão: {versao}', 'green'))
 keep_alive.keep_alive()
 client.run(f"{token}")
