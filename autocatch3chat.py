@@ -397,6 +397,23 @@ async def on_message(message):
                         await asyncio.sleep(3)
                         await message.channel.send('<@716390085896962058> h')
     if not message.author.bot:
+        content = message.content
+        if f'{prefix}start' in content and message.author.id == client.user.id:
+                    if paused:
+                        if message.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)]:
+                            paused = False
+                            await message.channel.send('Bot iniciado.')
+                    else:
+                        if message.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)]:
+                            await message.channel.send('Bot já está em execução.')
+        if f'{prefix}stop' in content and message.author.id == client.user.id:
+            if not paused:
+                if message.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)]:
+                    paused = True
+                    await message.channel.send('Bot pausado com sucesso.')
+                else:
+                    if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)]:
+                        await message.channel.send('Bot já está Pausado.')
         await client.process_commands(message)
 
 @client.command(name='falar', aliases=['echo', 'say'])
@@ -430,7 +447,7 @@ async def stop_cmd(ctx):
 async def ajuda_cmd(ctx):
     global help_command
     if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)] and help_command == 1:
-        await ctx.send(f'```\n**lista de comandos**\n{prefix}start  •  usado para iniciar o bot\n{prefix}stop  •  usado para parar o bot.\nem-breve novos comandos.')
+        await ctx.send(f'```\n**lista de comandos**\nstart/iniciar  •  usado para iniciar o bot\nstop/parar  •  usado para parar o bot.\nsay/echo/falar  -  usado para controlar o bot atravez de outros lugares\n```')
         help_command += 1
     else:
         if help_command == 2:
