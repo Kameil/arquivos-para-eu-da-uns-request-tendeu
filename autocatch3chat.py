@@ -1,7 +1,7 @@
 import re, os, asyncio, random, string, keep_alive, random, termcolor
 from discord.ext import commands, tasks
 from termcolor import colored
-version = 'v1.4.0'
+version = 'v1.3.5'
 
 user_token = os.environ['user_token']
 catch_id = os.environ['catch_id']
@@ -419,6 +419,10 @@ async def on_message(message):
 @client.command(name='falar', aliases=['echo', 'say'])
 async def say(ctx, *, args):
     if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)]:
+        digitar = ctx.channel.id
+        typing_channel = client.get_channel(int(digitar))
+        await typing_channel.trigger_typing()
+        await asyncio.sleep(2)
         await ctx.send(args)
       
 @client.command(name='ligar', aliases=['start'])
