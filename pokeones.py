@@ -2,7 +2,6 @@ import re, os, asyncio, random, string, keep_alive, random
 from discord.ext import commands, tasks
 from termcolor import colored
 
-versao = '1.1.2'
 pokeone = 473020399060385792
 prefixo = os.environ['prefix']
 paused = False
@@ -51,7 +50,7 @@ async def on_message(message):
                         await message.channel.send('1')
             if message.embeds:
                 embed_inbatle = message.embeds[0].description
-                if "You're already in a battle." in embed_inbatle:
+                if embed_inbatle and "You're already in a battle." in embed_inbatle:
                     await asyncio.sleep(1)
                     await channel.send('1')
             if 'Keep the calm!' in message.content:
@@ -63,6 +62,6 @@ async def parar():
 
 async def iniciar():
     analize_loop.start()
-print(colored(f'Bot iniciado com sucesso •\nCom prefixo: {prefixo}\n versão: {versao}', 'green'))
+print(colored(f'Bot iniciado com sucesso •\nCom prefixo: {prefixo}', 'green'))
 keep_alive.keep_alive()
 client.run(f"{token}")
