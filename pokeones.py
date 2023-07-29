@@ -36,7 +36,7 @@ async def on_message(message):
         if message.author.id == pokeone:
             if message.embeds:
                 embed_desc = message.embeds[0].description
-                if 'You have won the Wild Battle!' in embed_desc:
+                if embed_desc and 'You have won the Wild Battle!' in embed_desc:
                     await asyncio.sleep(1)
                     await message.channel.send(f'{prefixo}s')
             if message.embeds:
