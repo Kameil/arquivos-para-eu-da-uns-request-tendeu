@@ -1,30 +1,28 @@
 import re, os, asyncio, random, string, keep_alive, random, termcolor
 from discord.ext import commands, tasks
 from termcolor import colored
-version = 'v1.3.0 beta'
+version = 'v1.3.5'
 
 user_token = os.environ['user_token']
 catch_id = os.environ['catch_id']
 catch_id2 = os.environ['catch_id2']
 catch_id3 = os.environ['catch_id3']
 ping = os.environ['captcha_ping']
+help_command = 1
 with open('data/pokemon', 'r', encoding='utf8') as file:
     pokemon_list = file.read()
 with open('data/legendary', 'r') as file:
     legendary_list = file.read()
 with open('data/mythical', 'r') as file:
     mythical_list = file.read()
-with open('data/level', 'r') as file:
-    to_level = file.readline()
 num_pokemon = 0
 shiny = 0
 legendary = 0
 mythical = 0
 prefix = os.environ['prefix']
-
 poketwo = 716390085896962058
 client = commands.Bot(command_prefix=f'{prefix}')
-intervals = [50000.0, 30000.2, 30000.4, 30000.6, 30000.8]
+
 #solve ai dos pokemon tlgd ne
 def solve(message):
     hint = []
@@ -43,9 +41,14 @@ paused = False
 
 @client.event
 async def on_ready():
-    print(f'Logged into account: {client.user.name}')
+    print(colored(f'Autocatch em execuçao em : {client.user.name}', 'green'))
     channel = client.get_channel(int(catch_id))
+    typing_channel = client.get_channel(int(catch_id))
+    await typing_channel.trigger_typing()
+    await asyncio.sleep(2)
     await channel.send('autocatch online.')
+
+
 @client.event
 async def on_message(message):
     global paused
@@ -423,8 +426,19 @@ async def stop(ctx):
         if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)]:
             await ctx.send('Bot já está Pausado.')
 @client.command()
-async def sexo(ctx):
-  await ctx.send('sexo')
+async def help(ctx):
+    global help_command
+    if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)] and help_command == 1:
+        await ctx.send(f'```\n**lista de comandos**\n{prefix}start  •  usado para iniciar o bot\n{prefix}stop  •  usado para parar o bot.\nem-breve novos comandos.')
+        help_command += 1
+    else:
+        if help_command == 2:
+            await ctx.send('O comando **help** só pode ser utilizado uma vez a cada vez que voce inicia o bot.')
+            help_command += 1
+        else:
+            if help_command == 3:
+                print('ih ala tentou usar o help')
+                help_command += 1
 
 
   
