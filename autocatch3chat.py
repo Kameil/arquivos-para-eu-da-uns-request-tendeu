@@ -1,7 +1,7 @@
 import re, os, asyncio, random, string, keep_alive, random, termcolor
 from discord.ext import commands, tasks
 from termcolor import colored
-version = 'v1.3.7'
+version = 'v1.3.5'
 
 user_token = os.environ['user_token']
 catch_id = os.environ['catch_id']
@@ -21,7 +21,7 @@ legendary = 0
 mythical = 0
 prefix = os.environ['prefix']
 poketwo = 716390085896962058
-client = commands.Bot(command_prefix=f'{prefix}')
+client = commands.Bot(command_prefix=f'{prefix}', help_command=None)
 
 #solve ai dos pokemon tlgd ne
 def solve(message):
@@ -400,7 +400,7 @@ async def on_message(message):
         await client.process_commands(message)
 
 @client.command(name='falar', aliases=['echo', 'say'])
-async def say_cmd(ctx, *, args):
+async def say(ctx, *, args):
     if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)]:
         await ctx.send(args)
       
@@ -426,7 +426,7 @@ async def stop_cmd(ctx):
         if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)]:
             await ctx.send('Bot já está Pausado.')
             
-@client.command(name='ajuda', aliases=['ajud', 'aju', 'aj', 'a'])
+@client.command(name='ajuda', aliases=['ajud', 'aju', 'aj', 'a', 'help'])
 async def ajuda_cmd(ctx):
     global help_command
     if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)] and help_command == 1:
@@ -441,7 +441,9 @@ async def ajuda_cmd(ctx):
                 print('ih ala tentou usar o help')
                 help_command += 1
 
+  
+
 keep_alive.keep_alive()
 print(colored(f'Pokétwo Autocacther.\n\nsò mitada violenta versão :{version}\n\nEvent Log:', 'green'))
-print(colored(f'o prefix do autocatch é "{prefix}".', 'yellow'))
+print(colored(f'o prefix do autocatch é "{prefix}".', 'yellow'), colored(f'use {prefix}ajuda para ver a lista de commandos', 'purple'))
 client.run(f"{user_token}")
