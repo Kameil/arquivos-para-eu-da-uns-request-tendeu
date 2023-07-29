@@ -399,13 +399,13 @@ async def on_message(message):
     if not message.author.bot:
         await client.process_commands(message)
 
-@client.command()
+@client.command(name='falar', aliases['echo', 'say'])
 async def say(ctx, *, args):
     if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)]:
         await ctx.send(args)
       
-@client.command()
-async def start(ctx):
+@client.command(name='iniciar', aliases['start'])
+async def start_cmd(ctx):
     global paused
     if paused:
         if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)]:
@@ -415,8 +415,8 @@ async def start(ctx):
             if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)]:
                 await ctx.send('Bot já está em execução.')
 
-@client.command()
-async def stop(ctx):
+@client.command(name='parar', aliases=['stop'])
+async def stop_cmd(ctx):
     global paused
     if not paused:
         if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)]:
@@ -425,8 +425,9 @@ async def stop(ctx):
     else:
         if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)]:
             await ctx.send('Bot já está Pausado.')
-@client.command()
-async def help(ctx):
+            
+@client.command(name='ajuda', aliases['ajud', 'aju', 'aj', 'a'])
+async def ajuda_cmd(ctx):
     global help_command
     if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)] and help_command == 1:
         await ctx.send(f'```\n**lista de comandos**\n{prefix}start  •  usado para iniciar o bot\n{prefix}stop  •  usado para parar o bot.\nem-breve novos comandos.')
@@ -440,7 +441,19 @@ async def help(ctx):
                 print('ih ala tentou usar o help')
                 help_command += 1
 
-
+async def help(ctx):
+    global help_command
+    if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)] and help_command == 1:
+        await ctx.send(f'```\n**lista de comandos**\n{prefix}start  •  usado para iniciar o bot\n{prefix}stop  •  usado para parar o bot.\nem-breve novos comandos.')
+        help_command += 1
+    else:
+        if help_command == 2:
+            await ctx.send('O comando **help** só pode ser utilizado uma vez a cada vez que voce inicia o bot.')
+            help_command += 1
+        else:
+            if help_command == 3:
+                print('ih ala tentou usar o help')
+                help_command += 1
   
 
 keep_alive.keep_alive()
