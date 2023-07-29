@@ -1,7 +1,7 @@
 import re, os, asyncio, random, string, keep_alive, random, termcolor
 from discord.ext import commands, tasks
 from termcolor import colored
-version = 'v1.3.5'
+version = 'v1.3.6'
 
 user_token = os.environ['user_token']
 catch_id = os.environ['catch_id']
