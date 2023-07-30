@@ -1,7 +1,7 @@
 import re, os, asyncio, random, string, keep_alive, random, termcolor
 from discord.ext import commands, tasks
 from termcolor import colored
-version = 'v1.4.0'
+version = 'v1.5.0'
 
 user_token = os.environ['user_token']
 catch_id = os.environ['catch_id']
@@ -22,6 +22,8 @@ mythical = 0
 prefix = os.environ['prefix']
 poketwo = 716390085896962058
 client = commands.Bot(command_prefix=[f'{prefix} ', f'{prefix}'], help_command=None)
+captcha_verify = False
+captcha_message = 'Erro.!'
 
 #solve ai dos pokemon tlgd ne
 def solve(message):
@@ -52,19 +54,29 @@ async def on_ready():
 @client.event
 async def on_message(message):
     global paused
+    global captcha_verify
+    global captcha_message
     if message.channel.id == int(catch_id):
         channel = client.get_channel(int(catch_id))
         if message.author.id == poketwo:
             if message.embeds:
                 embed_title = message.embeds[0].title
                 if 'wild pokémon has appeared!' in embed_title:
-                    timesleep = random.uniform(1.5, 2.0)
-                    await asyncio.sleep(0)
-                    if not paused:
-                        typing_channel = client.get_channel(int(catch_id))
-                        await typing_channel.trigger_typing()
+                    if paused:
+                        if captcha_verify:
+                            typing_channel = client.get_channel(int(catch_id))
+                            await typing_channel.trigger_typing()
+                            await message.channel.send(f'Bot esta pausado pois detectou um **capctha**.\n{captcha_message}')
+                    else:
+                        timesleep = random.uniform(1.5, 2.0)
+                        await asyncio.sleep(0)
+                        if not paused:
+                            typing_channel = client.get_channel(int(catch_id))
+                            await typing_channel.trigger_typing()
                         await asyncio.sleep(timesleep)
                         await message.channel.send('<@716390085896962058> h')
+                        if captcha_verify:
+                            captcha_verify = False
             else:
                 content = message.content
                 if 'The pokémon is ' in content:
@@ -160,8 +172,10 @@ async def on_message(message):
                         typing_channel = client.get_channel(int(catch_id))
                         await typing_channel.trigger_typing()
                         await asyncio.sleep(timesleep)
-                        await message.channel.send(f'<@{ping}> captcha ai baitola, use {prefix}start para despausar.')
+                        await message.channel.send(f'<@{ping}> captcha detectado, use {prefix}start para despausar.')
+                        captcha_verify = True
                         paused = True
+                        captcha_message = content
                         if not paused:
                             typing_channel =   client.get_channel(int(catch_id))
                             await typing_channel.trigger_typing()
@@ -173,13 +187,25 @@ async def on_message(message):
             if message.embeds:
                 embed_title = message.embeds[0].title
                 if 'wild pokémon has appeared!' in embed_title:
-                    timesleep = random.uniform(4.5, 6.0)
-                    await asyncio.sleep(0)
-                    if not paused:
-                        typing_channel = client.get_channel(int(catch_id2))
-                        await typing_channel.trigger_typing()
-                        await asyncio.sleep(timesleep)
-                        await message.channel.send('<@716390085896962058> h')
+                    if paused:
+                        if captcha_verify:
+                            typing_channel = client.get_channel(int(catch_id2))
+                            await typing_channel.trigger_typing()
+                            await asyncio.sleep(1)
+                            await message.channel.send(f'Bot esta pausado pois detectou um **capctha**.\n{captcha_message}')
+                    else:
+                        timesleep = random.uniform(4.5, 6.0)
+                        await asyncio.sleep(0)
+                        if not paused:
+                            typing_channel = client.get_channel(int(catch_id2))
+                            await typing_channel.trigger_typing()
+                            await asyncio.sleep(timesleep)
+                            if paused:
+                                await message.channel.send(f'Nao foi possivel concluir o catch!:red_sircle: pois um **captcha** foi dectado.\n{captcha_message}')
+                            else:
+                                await message.channel.send('<@716390085896962058> h')
+                                if captcha_verify:
+                                    captcha_verify = False
             else:
                 content = message.content
                 if 'The pokémon is ' in content:
@@ -272,6 +298,8 @@ async def on_message(message):
                     await asyncio.sleep(timesleep)
                     await message.channel.send(f'<@{ping}> captcha ai baitola, use {prefix}start para despausar.')
                     paused = True
+                    captcha_verify = True
+                    captcha_message = content
                     if not paused:
                         typing_channel = client.get_channel(int(catch_id))
                         await typing_channel.trigger_typing()
@@ -284,13 +312,25 @@ async def on_message(message):
             if message.embeds:
                 embed_title = message.embeds[0].title
                 if 'wild pokémon has appeared!' in embed_title:
-                    timesleep = random.uniform(5.5, 6.5)
-                    await asyncio.sleep(0)
-                    if not paused:
-                        typing_channel = client.get_channel(int(catch_id3))
-                        await typing_channel.trigger_typing()
-                        await asyncio.sleep(timesleep)
-                        await message.channel.send('<@716390085896962058> h')
+                    if paused:
+                        if captcha_verify:
+                            typing_channel = client.get_channel(int(catch_id3))
+                            await typing_channel.trigger_typing()
+                            await message.channel.send(f'Bot esta pausado pois detectou um **capctha**.\n{captcha_message}')
+                        
+                    else:
+                        timesleep = random.uniform(5.5, 6.5)
+                        await asyncio.sleep(0)
+                        if not paused:
+                            typing_channel = client.get_channel(int(catch_id3))
+                            await typing_channel.trigger_typing()
+                            await asyncio.sleep(timesleep)
+                            if paused:
+                                await message.channel(f'Nao foi possivel pegar esse pokemon pois o bot detectou um captcha.\n{captcha_message}')
+                            else:
+                                await message.channel.send('<@716390085896962058> h')
+                                if captcha_verify:
+                                    captcha_verify = False
             else:
                 content = message.content
                 if 'The pokémon is ' in content:
@@ -391,6 +431,8 @@ async def on_message(message):
                     await asyncio.sleep(timesleep)
                     await message.channel.send(f'<@{ping}> capctha, use {prefix}start para despausar.')
                     paused = True
+                    captcha_verify = True
+                    captcha_message = content
                     if not paused:
                         typing_channel = client.get_channel(int(catch_id))
                         await typing_channel.trigger_typing()
