@@ -21,7 +21,7 @@ legendary = 0
 mythical = 0
 prefix = os.environ['prefix']
 poketwo = 716390085896962058
-client = commands.Bot(command_prefix=f'{prefix}', help_command=None)
+client = commands.Bot(command_prefix=[f'{prefix} ', f'{prefix}'], help_command=None)
 
 #solve ai dos pokemon tlgd ne
 def solve(message):
