@@ -1,7 +1,7 @@
 import re, os, asyncio, random, string, keep_alive, random, termcolor
 from discord.ext import commands, tasks
 from termcolor import colored
-version = 'v1.5.0'
+version = 'v1.5.1'
 
 user_token = os.environ['user_token']
 catch_id = os.environ['catch_id']
@@ -440,7 +440,7 @@ async def on_message(message):
                         await message.channel.send('<@716390085896962058> h')
     if not message.author.bot:
         content = message.content
-        if content.startswith(f'{prefix}start') and message.author.id == client.user.id:
+        if content.startswith(f'{prefix}start') or content.startswith(f'{prefix}ligar') and message.author.id == client.user.id:
                     if paused:
                         if message.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)]:
                             paused = False
@@ -448,7 +448,7 @@ async def on_message(message):
                     else:
                         if message.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)]:
                             await message.channel.send('Bot já está em execução.')
-        if content.startswith(f'{prefix}stop') and message.author.id == client.user.id:
+        if content.startswith(f'{prefix}stop') or content.startswith(f'{prefix}parar') and message.author.id == client.user.id:
             if not paused:
                 if message.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)]:
                     paused = True
