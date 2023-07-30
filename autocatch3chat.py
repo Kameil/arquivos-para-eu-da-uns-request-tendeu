@@ -406,7 +406,7 @@ async def on_message(message):
                     else:
                         if message.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)]:
                             await message.channel.send('Bot já está em execução.')
-        if content.startswith(f'{prefix}start') and message.author.id == client.user.id:
+        if content.startswith(f'{prefix}stop') and message.author.id == client.user.id:
             if not paused:
                 if message.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)]:
                     paused = True
