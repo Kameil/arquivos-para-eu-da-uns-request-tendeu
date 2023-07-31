@@ -41,7 +41,6 @@ def solve(message):
 
 paused = False
 
-import emoji
 from unidecode import unidecode
 
 def remover_emojis(texto):
