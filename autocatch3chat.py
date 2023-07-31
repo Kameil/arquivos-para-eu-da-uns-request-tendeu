@@ -1,7 +1,7 @@
 import re, os, asyncio, random, string, keep_alive, random, termcolor
 from discord.ext import commands, tasks
 from termcolor import colored
-version = 'v1.5.2'
+version = 'v1.5.5 emoji'
 
 user_token = os.environ['user_token']
 catch_id = os.environ['catch_id']
@@ -24,7 +24,7 @@ poketwo = 716390085896962058
 client = commands.Bot(command_prefix=[f'{prefix} ', f'{prefix}'], help_command=None)
 captcha_verify = False
 captcha_message = 'Erro.!'
-
+#vd
 #solve ai dos pokemon tlgd ne
 def solve(message):
     hint = []
@@ -40,6 +40,25 @@ def solve(message):
 
 
 paused = False
+
+import emoji
+from unidecode import unidecode
+
+def remover_emojis(texto):
+    # Remova o emoji ♀️ e ♂️ substituindo-os por uma string vazia
+    texto_sem_emojis = texto.replace('♀️', '').replace('♂️', '')
+    return texto_sem_emojis
+
+def remover_acentos(palavra):
+    return unidecode(palavra)
+
+def remover_acentos(palavra):
+    return unidecode(palavra)
+
+def limpar_texto(texto):
+    texto_sem_emojis = remover_emojis(texto)
+    texto_sem_acentos = remover_acentos(texto_sem_emojis)
+    return texto_sem_acentos
 
 @client.event
 async def on_ready():
@@ -85,13 +104,14 @@ async def on_message(message):
                     else:
                         for i in solve(content):
                             iu = i.lower()
+                            pokemon_name = limpar_texto(iu)
                             timesleep = random.uniform(0.8, 2.5)
                             await asyncio.sleep(0)
                             if not paused:
                                 typing_channel = client.get_channel(int(catch_id))
                                 await typing_channel.trigger_typing()
                                 await asyncio.sleep(timesleep)
-                                await message.channel.send(f'<@716390085896962058> c {iu}')
+                                await message.channel.send(f'<@716390085896962058> c {pokemon_name}')
                     check = random.randint(1, 60)
                     if check == 1:
                         await asyncio.sleep(900)
@@ -214,13 +234,14 @@ async def on_message(message):
                     else:
                         for i in solve(content):
                             iu = i.lower()
+                            pokemon_name = limpar_texto(iu)
                             timesleep = random.uniform(0.8, 1.8)
                             await asyncio.sleep(0)
                             if not paused:
                                 typing_channel = client.get_channel(int(catch_id2))
                                 await typing_channel.trigger_typing()
                                 await asyncio.sleep(timesleep)
-                                await message.channel.send(f'<@716390085896962058> c {iu}')
+                                await message.channel.send(f'<@716390085896962058> c {pokemon_name}')
                     check = random.randint(1, 60)
                     if check == 1:
                         await asyncio.sleep(900)
@@ -339,13 +360,14 @@ async def on_message(message):
                     else:
                         for i in solve(content):
                             iu = i.lower()
+                            pokemon_name = limpar_texto(iu)
                             timesleep = random.uniform(3.8, 4.5)
                             await asyncio.sleep(0)
                             if not paused:
                                 typing_channel = client.get_channel(int(catch_id3))
                                 await typing_channel.trigger_typing()
                                 await asyncio.sleep(timesleep)
-                                await message.channel.send(f'<@716390085896962058> c {iu}')
+                                await message.channel.send(f'<@716390085896962058> c {pokemon_name}')
                     check = random.randint(1, 60)
                     if check == 1:
                         await asyncio.sleep(900)
