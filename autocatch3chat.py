@@ -1,7 +1,7 @@
 import re, os, asyncio, random, string, keep_alive, random, termcolor
 from discord.ext import commands, tasks
 from termcolor import colored
-version = 'v1.5.5 emoji'
+version = 'v1.5.6 emoji'
 
 user_token = os.environ['user_token']
 catch_id = os.environ['catch_id']
@@ -51,8 +51,6 @@ def remover_emojis(texto):
 def remover_acentos(palavra):
     return unidecode(palavra)
 
-def remover_acentos(palavra):
-    return unidecode(palavra)
 
 def limpar_texto(texto):
     texto_sem_emojis = remover_emojis(texto)
