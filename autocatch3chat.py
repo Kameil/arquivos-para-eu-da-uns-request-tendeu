@@ -535,24 +535,31 @@ async def ajuda_cmd(ctx, comando=None):
         elif comando == "buy" or comando == "comprar" or comando == "b":
             await ctx.send(f'o comando `{comando}`usado para comprar incenses em todos os 3 catchs id.')
         else:
-            await ctx.send(f'o comando `{comando}`nao foi encontrado no bot.')
+            if comando is not None:
+                await ctx.send(f'o comando `{comando}`nao foi encontrado no bot.')
         if comando == None:
             await ctx.send(f'```\n**lista de comandos**\nstart/ligar  •  usado para iniciar o bot\nstop/pausar  •  usado para parar o bot.\nsay/echo/falar  •  usado para controlar o bot atravez de outras contas.\nbuy/comprar/b  •  usado para compra incenses exemplo" {prefix}buy incense" ele ira comprar incense em todos os chats\n\npara saber mais detalhes sobre um comando escreva {prefix}help [nome-do-comando]\n```')
 
+def item_name(item):
+    if item == "i":
+        item = "incense"
+    return item
 
-@client.command(name='buy', aliases=['comprar', 'i'])
-async def buy_cmd(ctx, item):
-    if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)] and item in ['incense', 'i']:
+@client.command(name='buy', aliases=['comprar', 'b'])
+async def buy_cmd(ctx, item=None):
+    if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)] and item in ['incense', 'i'] and item is not None:
+        incense = item_name(item)
         channel = client.get_channel(int(catch_id))
         await asyncio.sleep(1)
-        await channel.send(f'<@716390085896962058> buy {item}')
+        await channel.send(f'<@716390085896962058> buy {incense}')
         channel = client.get_channel(int(catch_id2))
         await asyncio.sleep(1)
-        await channel.send(f'<@716390085896962058> buy {item}')
+        await channel.send(f'<@716390085896962058> buy {incense}')
         channel = client.get_channel(int(catch_id3))
         await asyncio.sleep(1)
-        await channel.send(f'<@716390085896962058> buy {item}')
-        
+        await channel.send(f'<@716390085896962058> buy {incense}')
+    if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)] and item == None:
+        await ctx.send("Você precisa selecionar um comando antes\n exemplo: [incense, i] ambos usados para comprar incense.")
         
     
 
