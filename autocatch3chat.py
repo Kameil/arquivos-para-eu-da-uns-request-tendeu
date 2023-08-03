@@ -1,7 +1,7 @@
 import re, os, asyncio, random, string, keep_alive, random, termcolor
 from discord.ext import commands, tasks
 from termcolor import colored
-version = 'v1.5.8 incense'
+version = 'v1.5.9 incense'
 
 user_token = os.environ['user_token']
 catch_id = os.environ['catch_id']
@@ -528,13 +528,13 @@ async def buy_cmd(ctx, item):
     if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)] and item == "incense":
         channel = client.get_channel(int(catch_id))
         await asyncio.sleep(1)
-        await ctx.channel.send(f'<@716390085896962058> buy {item}')
+        await channel.send(f'<@716390085896962058> buy {item}')
         channel = client.get_channel(int(catch_id2))
         await asyncio.sleep(1)
-        await ctx.channel.send(f'<@716390085896962058> buy {item}')
+        await channel.send(f'<@716390085896962058> buy {item}')
         channel = client.get_channel(int(catch_id3))
         await asyncio.sleep(1)
-        await ctx.channel.send(f'<@716390085896962058> buy {item}')
+        await channel.send(f'<@716390085896962058> buy {item}')
         
         
     
