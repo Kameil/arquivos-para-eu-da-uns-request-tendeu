@@ -1,7 +1,7 @@
 import re, os, asyncio, random, string, keep_alive, random, termcolor
 from discord.ext import commands, tasks
 from termcolor import colored
-version = 'v1.5.9 incense'
+version = 'v1.6.5 incense help'
 
 user_token = os.environ['user_token']
 catch_id = os.environ['catch_id']
@@ -467,6 +467,20 @@ async def on_message(message):
                     else:
                         if message.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)]:
                             await message.channel.send('Bot já está em execução.')
+                            
+                            
+        if content.startswith(f'{prefix}buy incense') and message.author.id == client.user.id or content.startswith(f'{prefix}buy i') and message.author.id == client.user.id:
+            channel = client.get_channel(int(catch_id))
+            await asyncio.sleep(1)
+            await channel.send(f'<@716390085896962058> buy {item}')
+            channel = client.get_channel(int(catch_id2))
+            await asyncio.sleep(1)
+            await channel.send(f'<@716390085896962058> buy {item}')
+            channel = client.get_channel(int(catch_id3))
+            await asyncio.sleep(1)
+            await channel.send(f'<@716390085896962058> buy {item}')
+        
+        
         if content.startswith(f'{prefix}stop') and message.author.id == client.user.id or content.startswith(f'{prefix}parar') and message.author.id == client.user.id or content.startswith(f'{prefix} stop') and message.author.id == client.user.id or content.startswith(f'{prefix} parar') and message.author.id == client.user.id:
             if not paused:
                 if message.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)]:
@@ -509,23 +523,26 @@ async def stop_cmd(ctx):
             await ctx.send('Bot já está Pausado.')
             
 @client.command(name='ajuda', aliases=['ajud', 'aju', 'aj', 'a', 'help'])
-async def ajuda_cmd(ctx):
+async def ajuda_cmd(ctx, comando=None):
     global help_command
-    if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)] and help_command == 1:
-        await ctx.send(f'```\n**lista de comandos**\nstart/ligar  •  usado para iniciar o bot\nstop/pausar  •  usado para parar o bot.\nsay/echo/falar  •  usado para controlar o bot atravez de outras contas.\n```')
-        help_command += 1
-    else:
-        if help_command == 2:
-            await ctx.send('O comando **help** só pode ser utilizado uma vez a cada vez que voce inicia o bot.')
-            help_command += 1
+    if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)]:
+        if comando == "start" or comando == "ligar":
+            await ctx.send(f'O comando `{comando}` e utlizado para religar o bot quando ele esta pausado)
+        elif comando == "stop" or comando == "pausar":
+            await ctx.send(f'o comando `{comando} serve para pausar o bot.`')
+        elif comando == "say" or comando == "echo" or comando == "falar":
+            await ctx.send(f'o comando `{comando} serve para controlar o bot apartir de outras contas.`')
+        elif comando == "buy" or comando == "comprar" or comando == "b":
+            await ctx.send(f'o comando `{comando}`usado para comprar incenses em todos os 3 catchs id.')
         else:
-            if help_command == 3:
-                print('ih ala tentou usar o help')
-                help_command += 1
+            await ctx.send(f'o comando `{comando}`nao foi encontrado no bot.')
+        if comando == None:
+            await ctx.send(f'```\n**lista de comandos**\nstart/ligar  •  usado para iniciar o bot\nstop/pausar  •  usado para parar o bot.\nsay/echo/falar  •  usado para controlar o bot atravez de outras contas.\nbuy/comprar/b  •  usado para compra incenses exemplo" {prefix}buy incense" ele ira comprar incense em todos os chats\n\npara saber mais detalhes sobre um comando escreva {prefix}help [nome-do-comando]\n```')
 
-@client.command(name='buy', aliases=['comprar'])
+
+@client.command(name='buy', aliases=['comprar', 'i'])
 async def buy_cmd(ctx, item):
-    if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)] and item == "incense":
+    if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)] and item in ['incense', 'i']:
         channel = client.get_channel(int(catch_id))
         await asyncio.sleep(1)
         await channel.send(f'<@716390085896962058> buy {item}')
