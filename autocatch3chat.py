@@ -1,7 +1,7 @@
 import re, os, asyncio, random, string, keep_alive, random, termcolor
 from discord.ext import commands, tasks
 from termcolor import colored
-version = 'v1.6.6 incense help'
+version = 'v1.6.7 incense'
 
 user_token = os.environ['user_token']
 catch_id = os.environ['catch_id']
@@ -470,6 +470,7 @@ async def on_message(message):
                             
                             
         if content.startswith(f'{prefix}buy incense') and message.author.id == client.user.id or content.startswith(f'{prefix}buy i') and message.author.id == client.user.id:
+            item = "incense"
             channel = client.get_channel(int(catch_id))
             await asyncio.sleep(1)
             await channel.send(f'<@716390085896962058> buy {item}')
