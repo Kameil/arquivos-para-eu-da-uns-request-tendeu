@@ -1,7 +1,7 @@
 import re, os, asyncio, random, string, keep_alive, random, termcolor
 from discord.ext import commands, tasks
 from termcolor import colored
-version = 'v1.5.6 emoji'
+version = 'v1.5.7 incense'
 
 user_token = os.environ['user_token']
 catch_id = os.environ['catch_id']
@@ -523,7 +523,23 @@ async def ajuda_cmd(ctx):
                 print('ih ala tentou usar o help')
                 help_command += 1
 
-  
+@client.command(name='buy', aliases=['comprar'])
+async def buy_cmd(ctx, item):
+    if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)] and item == "incense":
+        channel = client.get_channel(int(catch_id))
+        await asyncio.sleep(1)
+        ctx.channel.send(f'<@716390085896962058> buy {item}')
+        channel = client.get_channel(int(catch_id2))
+        await asyncio.sleep(1)
+        ctx.channel.send(f'<@716390085896962058> buy {item}')
+        channel = client.get_channel(int(catch_id3))
+        await asyncio.sleep(1)
+        ctx.channel.send(f'<@716390085896962058> buy {item}')
+        
+        
+    
+
+    
 
 keep_alive.keep_alive()
 print(colored(f'Pokétwo Autocacther.\n\nsò mitada violenta versão :{version}\n\nEvent Log:', 'green'))
