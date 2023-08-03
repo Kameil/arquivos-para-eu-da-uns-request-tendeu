@@ -527,9 +527,9 @@ async def ajuda_cmd(ctx, comando=None):
     global help_command
     if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)]:
         if comando == "start" or comando == "ligar":
-            await ctx.send(f'O comando `{comando}` e utlizado para religar o bot quando ele esta pausado)
+            await ctx.send(f'O comando `{comando}` e utlizado para religar o bot quando ele esta pausado')
         elif comando == "stop" or comando == "pausar":
-            await ctx.send(f'o comando `{comando} serve para pausar o bot.`')
+            await ctx.send(f'o comando `{comando}` serve para pausar o bot.')
         elif comando == "say" or comando == "echo" or comando == "falar":
             await ctx.send(f'o comando `{comando} serve para controlar o bot apartir de outras contas.`')
         elif comando == "buy" or comando == "comprar" or comando == "b":
