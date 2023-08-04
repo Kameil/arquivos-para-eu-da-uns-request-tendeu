@@ -171,7 +171,7 @@ async def on_message(message):
                         await asyncio.sleep(timesleep)
                         await message.channel.send('<@716390085896962058> i l')
                     else:
-                        print(f'Total Pokémon Caught c1: {num_pokemon} :{pokemon}')
+                        print(colored(f'{client.user.name}  -  Total Pokémon Caught: {num_pokemon} :{pokemon}', 'blue'))
                 elif 'You have completed the quest' in content:
                         timesleep = random.uniform(0.1, 2.5)
                         typing_channel = client.get_channel(int(catch_id2))
@@ -308,7 +308,7 @@ async def on_message(message):
                         await typing_channel.trigger_typing()
                         await asyncio.sleep(timesleep)
                         await message.channel.send('<@716390085896962058> profile')
-                        print(f'Total Pokémon Caught c2: {num_pokemon} :{pokemon}')
+                        print(colored(f'{client.user.name}  -  Total Pokémon Caught: {num_pokemon} :{pokemon}', 'blue'))
                 elif 'human' in content:
                     timesleep = random.uniform(5.5, 1.5)
                     typing_channel = client.get_channel(int(catch_id))
@@ -406,7 +406,7 @@ async def on_message(message):
                         await message.channel.send('<@716390085896962058> i l')
                     elif re.findall('^' + pokemon + '$', legendary_list, re.MULTILINE):
                         legendary += 1
-                        print(f'Legendary Pokémon caught! Pokémon: {pokemon}')
+                        print(colored(f'Legendary Pokémon caught! Pokémon: {pokemon}', 'yellow'))
                         print(f'Shiny: {shiny} | Legendary: {legendary} | Mythical: {mythical}')
                         timesleep = random.uniform(0.8, 1.5)
                         typing_channel = client.get_channel(int(catch_id3))
@@ -415,7 +415,7 @@ async def on_message(message):
                         await message.channel.send('<@716390085896962058> i l')
                     elif re.findall('^' + pokemon + '$', mythical_list, re.MULTILINE):
                         mythical += 1
-                        print(f'Mythical Pokémon caught! Pokémon: {pokemon}')
+                        print(colored(f'Pokemon Mythical Pego : {pokemon}', 'green'))
                         print(f'Shiny: {shiny} | Legendary: {legendary} | Mythical: {mythical}')
                         timesleep = random.uniform(0.5, 1.5)
                         typing_channel = client.get_channel(int(catch_id3))
@@ -423,7 +423,7 @@ async def on_message(message):
                         await asyncio.sleep(timesleep)
                         await message.channel.send('<@716390085896962058> i l')
                     else:
-                        print(f'Total Pokémon Caught c2: {num_pokemon} :{pokemon}')
+                        print(colored(f'{client.user.name}  -  Total Pokémon Caught: {num_pokemon} :{pokemon}', 'blue'))
                 elif 'You have completed the quest' in content:
                         timesleep = random.uniform(1.0, 2.5)
                         typing_channel = client.get_channel(int(catch_id3))
@@ -524,17 +524,17 @@ async def stop_cmd(ctx):
             await ctx.send('Bot já está Pausado.')
             
 @client.command(name='ajuda', aliases=['ajud', 'aju', 'aj', 'a', 'help'])
-async def ajuda_cmd(ctx, comando=None):
+async def ajuda_cmd(ctx, comando=None, argumento=None):
     global help_command
     if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)]:
-        if comando == "start" or comando == "ligar":
-            await ctx.send(f'{comando} Comando para despausar o bot.')
-        elif comando == "stop" or comando == "pausar":
+        if comando in ['start', 'ligar']:
+            await ctx.send(f'{comando} Comando para despausar o Bot.')
+        elif comando in ['stop', 'pausar']:
             await ctx.send(f"{comando} Comando Para Pausar o Bot")
-        elif comando == "say" or comando == "echo" or comando == "falar":
+        elif comando in ['say', 'falar', 'echo']:
             await ctx.send(f'{comando}  -  Comando utlizado para controlar o bot aparti de outras contas.`')
-        elif comando == "buy" or comando == "comprar" or comando == "b":
-            await ctx.send(f'O comando `"{comando}" é utilizado para comprar **incenses** em todos os **catch_id**.`')
+        elif comando in ['buy', 'b', 'comprar']:
+            await ctx.send(f'{comando}  -  Comando para comprar incenses.')
         else:
             if comando is not None:
                 await ctx.send(f'Comando nao encontrado comando: {comando}')
@@ -543,13 +543,13 @@ async def ajuda_cmd(ctx, comando=None):
         print(colored(f"•  comando help executado por: {ctx.author.name}", "yellow"))
 
 def item_name(item):
-    if item == "i":
+    if item in ['I', 'Incense', 'INCENSE', 'i', 'incense']:
         item = "incense"
     return item
 
 @client.command(name='buy', aliases=['comprar', 'b'])
 async def buy_cmd(ctx, item=None):
-    if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)] and item in ['incense', 'i'] and item is not None:
+    if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)] and item in ['incense', 'i', 'INCENSE', 'Incense', 'I'] and item is not None:
         incense = item_name(item)
         channel = client.get_channel(int(catch_id))
         await asyncio.sleep(1)
