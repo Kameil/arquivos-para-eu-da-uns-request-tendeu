@@ -59,7 +59,7 @@ def limpar_texto(texto):
 
 @client.event
 async def on_ready():
-    print(colored(f'Autocatch em execuçao em : {client.user.name}', 'green'))
+    print(colored(f'Autocatch em execuçao em : {client.user.name}', 'black', 'on_withe'))
     channel = client.get_channel(int(catch_id))
     typing_channel = client.get_channel(int(catch_id))
     await typing_channel.trigger_typing()
@@ -569,6 +569,7 @@ async def buy_cmd(ctx, item=None):
     
 
 keep_alive.keep_alive()
-print(colored(f'Pokétwo Autocacther.\n\nsò mitada violenta versão :{version}\n\nEvent Log:', 'green'))
+print(colored(f'Pokétwo Autocacther.\n\nsò mitada violenta.', 'green', 'on_light_cyan'))
+print(f'Versao: {version}', 'cyan', 'on_withe')
 print(colored(f'o prefix do autocatch é "{prefix}".\n\nuse {prefix}ajuda para ver a lista de comandos.', 'yellow'))
 client.run(f"{user_token}")
