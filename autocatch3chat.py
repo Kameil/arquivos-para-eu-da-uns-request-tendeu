@@ -1,7 +1,7 @@
-import re, os, asyncio, random, string, keep_alive, random, termcolor
+import re, os, asyncio, random, string, keep_alive, random, termcolor, subprocess
 from discord.ext import commands, tasks
 from termcolor import colored
-version = 'v1.7.2 exec'
+version = 'v1.7.3 exec'
 
 user_token = os.environ['user_token']
 catch_id = os.environ['catch_id']
@@ -572,7 +572,7 @@ async def exec_cmd(ctx, process, *, executar):
         if developer == 'True':
             if process == 'sub':
                 await ctx.send('criando arquivo exec.py...')
-                with open('exec.py', 'w') as exec_code:
+                with open('exec-code.py', 'w') as exec_code:
                     exec_code.write(executar)
                 await asyncio.sleep(1)
                 await ctx.send('executando...')
@@ -580,10 +580,11 @@ async def exec_cmd(ctx, process, *, executar):
             elif process == 'exec':
                 await ctx.send('executando..')
                 exec(executar)
+                await ctx.send('executado.')
             else:
-                await ctx.send(f'process: {process} nao encontrado...')
+                await ctx.send(f'process: "{process}" nao encontrado')
         else:
-            await ctx.send('modo desenvolvedor desativado.')
+            await ctx.send('modo desenvolvedor nao esta ativo.')
             
 
 async def somitada():
