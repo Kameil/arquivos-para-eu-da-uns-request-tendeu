@@ -1,7 +1,7 @@
 import re, os, asyncio, random, string, keep_alive, random, termcolor
 from discord.ext import commands, tasks
 from termcolor import colored
-version = 'v1.7.1 termcolor'
+version = 'v1.7.2 asyncio'
 
 user_token = os.environ['user_token']
 catch_id = os.environ['catch_id']
@@ -565,11 +565,12 @@ async def buy_cmd(ctx, item=None):
         await ctx.send("Você precisa selecionar um comando antes\n exemplo: [incense, i] ambos usados para comprar incense.")
         
     
-
-    
+async def somitada():
+    await asyncio.sleep(1)
+    print(colored(f'\nPokétwo Autocacther.\n\nsò mitada violenta.', 'black', 'on_light_cyan'))
+    print(colored(f'Versao: {version}', 'black', 'on_white'))
+    print(colored(f'o prefix do autocatch é "{prefix}".\n\nuse {prefix}ajuda para ver a lista de comandos.', 'yellow'))
 
 keep_alive.keep_alive()
-print(colored(f'\nPokétwo Autocacther.\n\nsò mitada violenta.', 'black', 'on_light_cyan'))
-print(colored(f'Versao: {version}', 'black', 'on_white'))
-print(colored(f'o prefix do autocatch é "{prefix}".\n\nuse {prefix}ajuda para ver a lista de comandos.', 'yellow'))
+asyncio.run(somitada())
 client.run(f"{user_token}")
