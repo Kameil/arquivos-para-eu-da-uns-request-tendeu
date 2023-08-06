@@ -575,17 +575,15 @@ async def exec_cmd(ctx, process, *, executar):
                 with open('exec.py', 'w') as exec_code:
                     exec_code.write(executar)
                 await asyncio.sleep(1)
-                ctx.send('executando...')
+                await ctx.send('executando...')
                 subprocess.Popen(["python3", "exec.py"])
             elif process == 'exec':
-                ctx.send('executando..')
+                await ctx.send('executando..')
                 exec(executar)
             else:
-                ctx.send(f'process: {process} nao encontrado...')
+                await ctx.send(f'process: {process} nao encontrado...')
         else:
-            ctx.send('modo desenvolvedor desativado.')
-    else:
-        ctx.send('Voce nao possui o secret dev.')
+            await ctx.send('modo desenvolvedor desativado.')
             
 
 async def somitada():
