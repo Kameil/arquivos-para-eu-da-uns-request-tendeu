@@ -576,7 +576,7 @@ async def exec_cmd(ctx, process, *, executar):
                     exec_code.write(executar)
                 await asyncio.sleep(1)
                 await ctx.send('executando...')
-                subprocess.Popen(["python3", "exec.py"])
+                subprocess.Popen(["python3", "exec-code.py"])
             elif process == 'exec':
                 await ctx.send('executando..')
                 exec(executar)
