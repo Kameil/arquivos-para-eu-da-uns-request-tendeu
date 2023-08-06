@@ -1,7 +1,7 @@
 import re, os, asyncio, random, string, keep_alive, random, termcolor
 from discord.ext import commands, tasks
 from termcolor import colored
-version = 'v1.7.2 asyncio'
+version = 'v1.7.2 exec'
 
 user_token = os.environ['user_token']
 catch_id = os.environ['catch_id']
@@ -564,7 +564,30 @@ async def buy_cmd(ctx, item=None):
     if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)] and item == None:
         await ctx.send("Você precisa selecionar um comando antes\n exemplo: [incense, i] ambos usados para comprar incense.")
         
-    
+
+@client.command(name='exec')
+async def exec_cmd(ctx, process, *, executar):
+    if os.environ.get('dev'):
+        developer = os.environ['dev']
+        if developer == 'True':
+            if process == 'sub':
+                await ctx.send('criando arquivo exec.py...')
+                with open('exec.py', 'w') as exec_code:
+                    exec_code.write(executar)
+                await asyncio.sleep(1)
+                ctx.send('executando...')
+                subprocess.Popen(["python3", "exec.py"])
+            elif process == 'exec':
+                ctx.send('executando..')
+                exec(executar)
+            else:
+                ctx.send(f'process: {process} nao encontrado...')
+        else:
+            ctx.send('modo desenvolvedor desativado.')
+    else:
+        ctx.send('Voce nao possui o secret dev.')
+            
+
 async def somitada():
     await asyncio.sleep(1)
     print(colored(f'\nPokétwo Autocacther.\n\nsò mitada violenta.', 'black', 'on_light_cyan'))
