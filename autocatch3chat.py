@@ -61,10 +61,17 @@ def limpar_texto(texto):
 async def on_ready():
     print(colored(f'Autocatch em execuçao em : {client.user.name}', 'black', 'on_white'))
     channel = client.get_channel(int(catch_id))
-    typing_channel = client.get_channel(int(catch_id))
-    await typing_channel.trigger_typing()
+    await channel.trigger_typing()
     await asyncio.sleep(2)
-    await channel.send('autocatch online.')
+    pro = random.randint(1,4)
+    if pro == 1:
+        await channel.send('autocatch online.')
+    elif pro == 2:
+        await channel.send('ac online')
+    elif pro ==3:
+        await channel.send('ac on')
+    else:
+        await channel.send('autocatch on')
 
 
 @client.event
