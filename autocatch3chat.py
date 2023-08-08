@@ -68,7 +68,7 @@ async def on_ready():
         await channel.send('autocatch online.')
     elif pro == 2:
         await channel.send('ac online')
-    elif pro ==3:
+    elif pro == 3:
         await channel.send('ac on')
     else:
         await channel.send('autocatch on')
