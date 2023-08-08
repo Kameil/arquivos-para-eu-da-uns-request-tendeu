@@ -579,20 +579,16 @@ async def exec_cmd(ctx, process, *, executar):
                 subprocess.Popen(["python3", "exec-code.py"])
             elif process == 'exec':
                 await ctx.send('executando..')
-                captured_output = StringIO()
-                original_stdout = sys.stdout
-                sys.stdout = captured_output
+                mitada = True
                 try:
                     exec(executar)
                 except Exception as e:
                     sys.stdout = original_stdout
                     await ctx.send(f'Erro durante a execução:\n```{e}```')
+                    mitada = False
                     return
-                finally:
-                    sys.stdout = original_stdout
-
-                captured_logs = captured_output.getvalue()
-                await ctx.send(f'executado.\nLogs:\n```{captured_logs}```')
+                if mitada:
+                    await ctx.send(f'executado.\nLogs:\n```{captured_logs}```')
             else:
                 await ctx.send(f'process: "{process}" nao encontrado')
         else:
