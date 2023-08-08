@@ -583,7 +583,6 @@ async def exec_cmd(ctx, process, *, executar):
                 try:
                     exec(executar)
                 except Exception as e:
-                    sys.stdout = original_stdout
                     await ctx.send(f'Erro durante a execução:\n```{e}```')
                     mitada = False
                     return
