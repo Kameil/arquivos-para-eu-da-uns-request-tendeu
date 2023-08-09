@@ -6,7 +6,7 @@ pokeone = 473020399060385792
 if os.environ.get('prefix'):
     prefixo = os.environ['prefix']
 else:
-    prefixo = await osenv("prefix")
+    prefixo = asyncio.run(osenv("prefix"))
 paused = False
 token = os.environ['user_token']
 chat = os.environ['chat_id']
