@@ -46,7 +46,6 @@ async def on_message(message):
                         await message.channel.send(f'{prefixo}spawn')
                     else:
                         await message.channel.send(f'{prefixo}s')
-            if message.embeds:
                 embed_title = message.embeds[0].title
                 embed_footer = message.embeds[0].footer
                 if embed_title and 'Shiny Wild Pokémon' in embed_title:
@@ -57,22 +56,17 @@ async def on_message(message):
                         channel.trigger_typing()
                         await asyncio.sleep(fast)
                         await message.channel.send('1')
-            if message.embeds:
                 embed_inbatle = message.embeds[0].description
                 if embed_inbatle and "You're already in a battle." in embed_inbatle:
                     channel.trigger_typing()
                     await asyncio.sleep(fast)
                     await channel.send('1')
-            if 'Keep the calm!' in message.content:
-                channel.trigger_typing()
-                await asyncio.sleep(2)
-                await message.channel.send(f'{prefixo}s')
+            else:
+                if 'Keep the calm!' in message.content:
+                    channel.trigger_typing()
+                    await asyncio.sleep(2)
+                    await message.channel.send(f'{prefixo}s')
 
-async def parar():
-    analize_loop.stop()
-
-async def iniciar():
-    analize_loop.start()
     
 async def pokeoneautospawn():
     await asyncio.sleep(1)
