@@ -8,7 +8,7 @@ paused = False
 token = os.environ['user_token']
 chat = os.environ['chat_id']
 
-client = commands.Bot(command_prefix='vdd')
+client = commands.Bot(command_prefix='vdd', help_command=None)
 esperar = [60.0, 120.0, 90.0]
 
 @tasks.loop(seconds=random.choice(esperar))
