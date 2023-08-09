@@ -16,6 +16,7 @@ async def analize_loop():
     fast = random.randint(3,6)
     numero = 1
     channel = client.get_channel(int(chat))
+    channel.trigger_typing()
     await channel.send(f'{prefixo}s')
 
 @analize_loop.before_loop
@@ -26,34 +27,44 @@ analize_loop.start()
 
 @client.event
 async def on_ready():
-    print(f'Loguei ai: {client.user.name}') 
+    print(colored(f"Auto Spawn em Execuçao em - {client.user.name}", "blue")) 
 
 @client.event
 async def on_message(message):
     global paused
+    fast = random.randint(1,3)
     channel = client.get_channel(int(chat))
     if message.channel.id == int(chat):
         if message.author.id == pokeone:
             if message.embeds:
                 embed_desc = message.embeds[0].description
                 if embed_desc and 'You have won the Wild Battle!' in embed_desc:
-                    await asyncio.sleep(1)
-                    await message.channel.send(f'{prefixo}s')
+                    channel.trigger_typing()
+                    await asyncio.sleep(fast)
+                    dangoro = random.randint(1,10)
+                    if dangoro == 5:
+                        await message.channel.send(f'{prefixo}spawn')
+                    else:
+                        await message.channel.send(f'{prefixo}s')
             if message.embeds:
                 embed_title = message.embeds[0].title
                 embed_footer = message.embeds[0].footer
                 if embed_title and 'Shiny Wild Pokémon' in embed_title:
+                    channel.trigger_typing()
                     await message.channel.send(f'{prefixo}master')
                 else:
                     if embed_footer and 'Send 1' in embed_footer.text:
-                        await asyncio.sleep(1)
+                        channel.trigger_typing()
+                        await asyncio.sleep(fast)
                         await message.channel.send('1')
             if message.embeds:
                 embed_inbatle = message.embeds[0].description
                 if embed_inbatle and "You're already in a battle." in embed_inbatle:
-                    await asyncio.sleep(1)
+                    channel.trigger_typing()
+                    await asyncio.sleep(fast)
                     await channel.send('1')
             if 'Keep the calm!' in message.content:
+                channel.trigger_typing()
                 await asyncio.sleep(2)
                 await message.channel.send(f'{prefixo}s')
 
@@ -62,6 +73,11 @@ async def parar():
 
 async def iniciar():
     analize_loop.start()
-print(colored(f'Bot iniciado com sucesso •\nCom prefixo: {prefixo}', 'green'))
+    
+async def pokeoneautospawn():
+    await asyncio.sleep(1)
+    print(colored(f'Bot iniciado com sucesso •\nCom prefixo: {prefixo}', 'green', 'on_white'))
+    
 keep_alive.keep_alive()
+asyncio.run(pokeoneautospawn())
 client.run(f"{token}")
