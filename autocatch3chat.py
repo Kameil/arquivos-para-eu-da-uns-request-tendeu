@@ -41,7 +41,6 @@ def solve(message):
 
 paused = False
 
-from unidecode import unidecode
 
 def remover_emojis(texto):
     texto_sem_emojis = texto.replace('♀️', '').replace('♂️', '')
