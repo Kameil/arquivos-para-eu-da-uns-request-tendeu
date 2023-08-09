@@ -3,7 +3,10 @@ from discord.ext import commands, tasks
 from termcolor import colored
 
 pokeone = 473020399060385792
-prefixo = os.environ['prefix']
+if os.environ.get('prefix'):
+    prefixo = os.environ['prefix']
+else:
+    prefixo = await osenv("prefix")
 paused = False
 token = os.environ['user_token']
 chat = os.environ['chat_id']
@@ -67,7 +70,13 @@ async def on_message(message):
                     await asyncio.sleep(2)
                     await message.channel.send(f'{prefixo}s')
 
-    
+async def osenv(envv):
+    if envv == "prefix":
+        await asyncio.sleep(3)
+        print(colored('''Voce nao possui o secret "prefix" o AutoSpawn ira Iniciar Utilizando o prefixo Padrao "."''', "red"))
+        return "."
+
+
 async def pokeoneautospawn():
     await asyncio.sleep(1)
     print(colored(f'iniciando autospawn com prefix: "{prefixo}"...', 'black', 'on_white'))
