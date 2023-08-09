@@ -38,6 +38,8 @@ async def on_message(message):
         if message.author.id == pokeone:
             if message.embeds:
                 embed_desc = message.embeds[0].description
+                embed_title = message.embeds[0].title
+                embed_footer = message.embeds[0].footer
                 if embed_desc and 'You have won the Wild Battle!' in embed_desc:
                     channel.trigger_typing()
                     await asyncio.sleep(fast)
@@ -46,8 +48,7 @@ async def on_message(message):
                         await message.channel.send(f'{prefixo}spawn')
                     else:
                         await message.channel.send(f'{prefixo}s')
-                embed_title = message.embeds[0].title
-                embed_footer = message.embeds[0].footer
+                
                 if embed_title and 'Shiny Wild Pokémon' in embed_title:
                     channel.trigger_typing()
                     await message.channel.send(f'{prefixo}master')
@@ -56,8 +57,7 @@ async def on_message(message):
                         channel.trigger_typing()
                         await asyncio.sleep(fast)
                         await message.channel.send('1')
-                embed_inbatle = message.embeds[0].description
-                if embed_inbatle and "You're already in a battle." in embed_inbatle:
+                if embed_desc and "You're already in a battle." in embed_desc:
                     channel.trigger_typing()
                     await asyncio.sleep(fast)
                     await channel.send('1')
@@ -70,7 +70,7 @@ async def on_message(message):
     
 async def pokeoneautospawn():
     await asyncio.sleep(1)
-    print(colored(f'Bot iniciado com sucesso •\nCom prefixo: {prefixo}', 'green', 'on_white'))
+    print(colored(f'iniciando autospawn com prefix: "{prefixo}"...', 'black', 'on_white'))
     
 keep_alive.keep_alive()
 asyncio.run(pokeoneautospawn())
