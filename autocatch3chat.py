@@ -57,7 +57,7 @@ def remover_acentos(palavra):
             return unidecode(palavra)
         except Exception as e:
             print(f"Ocorreu um Erro no 'unidecode' o bot proseguira Normalmente. Mas sem a Funçao de remover acentos.\n{e}\n dica: Voce pode instalar o unidecode utilizando\npip install unidecode\nno shell.")
-            return(palavra)
+            return palavra
 
 
 def limpar_texto(texto):
