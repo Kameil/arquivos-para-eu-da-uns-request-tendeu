@@ -1,7 +1,7 @@
 import re, os, asyncio, random, string, keep_alive, random, termcolor, subprocess
 from discord.ext import commands, tasks
 from termcolor import colored
-version = 'v1.7.3 exec'
+version = 'v1.7.4 mitada'
 
 user_token = os.environ['user_token']
 catch_id = os.environ['catch_id']
@@ -44,12 +44,20 @@ paused = False
 from unidecode import unidecode
 
 def remover_emojis(texto):
-    # Remova o emoji ♀️ e ♂️ substituindo-os por uma string vazia
     texto_sem_emojis = texto.replace('♀️', '').replace('♂️', '')
     return texto_sem_emojis
 
 def remover_acentos(palavra):
-    return unidecode(palavra)
+    try:
+        from unidecode import unidecode
+    except ImportError:
+        try:
+            subprocess.Popen(['pip', 'install', 'unidecode'])
+            from unidecode import unidecode
+            return unidecode(palavra)
+        except Exception as e:
+            print(f"Ocorreu um Erro no 'unidecode' o bot proseguira Normalmente. Mas sem a Funçao de remover acentos.\n{e}\n dica: Voce pode instalar o unidecode utilizando\npip install unidecode\nno shell.")
+            return(palavra)
 
 
 def limpar_texto(texto):
