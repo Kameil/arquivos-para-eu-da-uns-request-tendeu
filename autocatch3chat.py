@@ -115,14 +115,14 @@ async def on_message(message):
                     else:
                         for i in solve(content):
                             iu = i.lower()
-                            pokemon_name = limpar_texto(iu)
+                            pokemon_name2 = limpar_texto(iu)
                             timesleep = random.uniform(0.8, 2.5)
                             await asyncio.sleep(0)
                             if not paused:
                                 typing_channel = client.get_channel(int(catch_id))
                                 await typing_channel.trigger_typing()
                                 await asyncio.sleep(timesleep)
-                                await message.channel.send(f'<@716390085896962058> c {pokemon_name}')
+                                await message.channel.send(f'<@716390085896962058> c {pokemon_name2}')
                     check = random.randint(1, 60)
                     if check == 1:
                         await asyncio.sleep(900)
@@ -245,14 +245,14 @@ async def on_message(message):
                     else:
                         for i in solve(content):
                             iu = i.lower()
-                            pokemon_name = limpar_texto(iu)
+                            pokemon_name3 = limpar_texto(iu)
                             timesleep = random.uniform(0.8, 1.8)
                             await asyncio.sleep(0)
                             if not paused:
                                 typing_channel = client.get_channel(int(catch_id2))
                                 await typing_channel.trigger_typing()
                                 await asyncio.sleep(timesleep)
-                                await message.channel.send(f'<@716390085896962058> c {pokemon_name}')
+                                await message.channel.send(f'<@716390085896962058> c {pokemon_name3}')
                     check = random.randint(1, 60)
                     if check == 1:
                         await asyncio.sleep(900)
@@ -371,14 +371,14 @@ async def on_message(message):
                     else:
                         for i in solve(content):
                             iu = i.lower()
-                            pokemon_name = limpar_texto(iu)
+                            pokemon_name1 = limpar_texto(iu)
                             timesleep = random.uniform(3.8, 4.5)
                             await asyncio.sleep(0)
                             if not paused:
                                 typing_channel = client.get_channel(int(catch_id3))
                                 await typing_channel.trigger_typing()
                                 await asyncio.sleep(timesleep)
-                                await message.channel.send(f'<@716390085896962058> c {pokemon_name}')
+                                await message.channel.send(f'<@716390085896962058> c {pokemon_name1}')
                     check = random.randint(1, 60)
                     if check == 1:
                         await asyncio.sleep(900)
