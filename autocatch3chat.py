@@ -1,7 +1,7 @@
 import re, os, asyncio, random, string, keep_alive, random, termcolor, subprocess
 from discord.ext import commands, tasks
 from termcolor import colored
-version = 'v1.7.5 bug do milênio'
+version = 'v1.8.0 bug do milênio'
 
 user_token = os.environ['user_token']
 catch_id = os.environ['catch_id']
@@ -89,17 +89,15 @@ async def on_message(message):
                 if 'wild pokémon has appeared!' in embed_title:
                     if paused:
                         if captcha_verify:
-                            typing_channel = client.get_channel(int(catch_id))
-                            await typing_channel.trigger_typing()
+                            await message.channel.trigger_typing()
                             await message.channel.send(f'Bot esta pausado pois detectou um **capctha**.\n{captcha_message}')
                     else:
                         timesleep = random.uniform(1.5, 2.0)
                         await asyncio.sleep(0)
                         if not paused:
-                            typing_channel = client.get_channel(int(catch_id))
-                            await typing_channel.trigger_typing()
-                        await asyncio.sleep(timesleep)
-                        await message.channel.send('<@716390085896962058> h')
+                            await message.channel.trigger_typing()
+                            await asyncio.sleep(timesleep)
+                            await message.channel.send('<@716390085896962058> h')
                         if captcha_verify:
                             captcha_verify = False
             else:
@@ -114,8 +112,7 @@ async def on_message(message):
                             timesleep = random.uniform(0.8, 2.5)
                             await asyncio.sleep(0)
                             if not paused:
-                                typing_channel = client.get_channel(int(catch_id))
-                                await typing_channel.trigger_typing()
+                                await message.channel.trigger_typing()
                                 await asyncio.sleep(timesleep)
                                 await message.channel.send(f'<@716390085896962058> c {pokemon_name2}')
                     check = random.randint(1, 60)
@@ -134,66 +131,67 @@ async def on_message(message):
                     pokemon = split[7].replace('!', '')
                     infol = random.randint(1, 20)
                     if infol == 1:
-                        timesleep = random.uniform(1.5, 4.5)
-                        typing_channel = client.get_channel(int(catch_id))
-                        await typing_channel.trigger_typing()
-                        await asyncio.sleep(timesleep)
-                        await message.channel.send('<@716390085896962058> i l')
+                        if not paused:
+                            timesleep = random.uniform(1.5, 4.5)
+                            await message.channel.trigger_typing()
+                            await asyncio.sleep(timesleep)
+                            await message.channel.send('<@716390085896962058> i l')
                     ping2 = random.randint(1, 30)
                     if ping2 == 1:
-                        timesleep = random.uniform(1.5, 4.5)
-                        typing_channel = client.get_channel(int(catch_id))
-                        await typing_channel.trigger_typing()
-                        await asyncio.sleep(timesleep)
-                        await message.channel.send('<@716390085896962058> ping')
+                        if not paused:
+                            timesleep = random.uniform(1.5, 4.5)
+                            await message.channel.trigger_typing()
+                            await asyncio.sleep(timesleep)
+                            await message.channel.send('<@716390085896962058> ping')
                     if f'a level 1 {pokemon}' in content:
-                        timesleep = random.uniform(0.3, 0.9)
-                        typing_channel = client.get_channel(int(catch_id))
-                        await typing_channel.trigger_typing()
-                        await asyncio.sleep(timesleep)
-                        await message.channel.send('<@716390085896962058> i l')
+                        if not paused:
+                            timesleep = random.uniform(0.3, 0.9)
+                            await message.channel.trigger_typing()
+                            await asyncio.sleep(timesleep)
+                            await message.channel.send('<@716390085896962058> i l')
                     if f'seem unusual...{pokemon}' in content:
-                        shiny += 1
-                        print(f'Shiny Pokémon caught! Pokémon: {pokemon}')
-                        print(f'Shiny: {shiny} | Legendary: {legendary} | Mythical: {mythical}')
-                        timesleep = random.uniform(0.4, 0.9)
-                        typing_channel = client.get_channel(int(catch_id))
-                        await typing_channel.trigger_typing()
-                        await asyncio.sleep(timesleep)
-                        await message.channel.send('<@716390085896962058> i l')
+                        if not paused:
+                            shiny += 1
+                            print(f'Shiny Pokémon caught! Pokémon: {pokemon}')
+                            print(f'Shiny: {shiny} | Legendary: {legendary} | Mythical: {mythical}')
+                            timesleep = random.uniform(0.4, 0.9)
+                            await message.channel.trigger_typing()
+                            await asyncio.sleep(timesleep)
+                            await message.channel.send('<@716390085896962058> i l')
                     elif re.findall('^' + pokemon + '$', legendary_list, re.MULTILINE):
-                        legendary += 1
-                        print(f'Legendary Pokémon caught! Pokémon: {pokemon}')
-                        print(f'Shiny: {shiny} | Legendary: {legendary} | Mythical: {mythical}')
-                        timesleep = random.uniform(0.5, 0.9)
-                        typing_channel = client.get_channel(int(catch_id))
-                        await typing_channel.trigger_typing()
-                        await asyncio.sleep(timesleep)
-                        await message.channel.send('<@716390085896962058> i l')
+                        if not paused:
+                            legendary += 1
+                            print(f'Legendary Pokémon caught! Pokémon: {pokemon}')
+                            print(f'Shiny: {shiny} | Legendary: {legendary} | Mythical: {mythical}')
+                            timesleep = random.uniform(0.5, 0.9)
+                            await message.channel.trigger_typing()
+                            await asyncio.sleep(timesleep)
+                            await message.channel.send('<@716390085896962058> i l')
                     elif re.findall('^' + pokemon + '$', mythical_list, re.MULTILINE):
-                        mythical += 1
-                        print(f'Mythical Pokémon caught! Pokémon: {pokemon}')
-                        print(f'Shiny: {shiny} | Legendary: {legendary} | Mythical: {mythical}')
-                        timesleep = random.uniform(0.4, 0.9)
-                        typing_channel = client.get_channel(int(catch_id))
-                        await typing_channel.trigger_typing()
-                        await asyncio.sleep(timesleep)
-                        await message.channel.send('<@716390085896962058> i l')
+                        if not paused:
+                            mythical += 1
+                            print(f'Mythical Pokémon caught! Pokémon: {pokemon}')
+                            print(f'Shiny: {shiny} | Legendary: {legendary} | Mythical: {mythical}')
+                            timesleep = random.uniform(0.4, 0.9)
+                            await message.channel.trigger_typing()
+                            await asyncio.sleep(timesleep)
+                            await message.channel.send('<@716390085896962058> i l')
                     else:
-                        print(colored(f'{client.user.name}  -  Total Pokémon Caught: {num_pokemon} :{pokemon}', 'blue'))
+                        if not paused:
+                            print(colored(f'{client.user.name}  -  Total Pokémon Caught: {num_pokemon} :{pokemon}', 'blue'))
                 elif 'You have completed the quest' in content:
+                    if not paused:
                         timesleep = random.uniform(0.1, 2.5)
-                        typing_channel = client.get_channel(int(catch_id2))
-                        await typing_channel.trigger_typing()
+                        await message.channel.trigger_typing()
                         await asyncio.sleep(timesleep)
                         await message.channel.send('<@716390085896962058> q')
-                elif 'You have completed this quest track and received the' in content:
+                elif 'You have completed this quest track and received the' in content and not paused:
                         timesleep = random.uniform(1.0, 2.5)
                         typing_channel = client.get_channel(int(catch_id2))
                         await typing_channel.trigger_typing()
                         await asyncio.sleep(timesleep)
                         await message.channel.send('<@716390085896962058> profile')
-                elif 'human' in content:
+                elif 'human' in content and not paused:
                         timesleep = random.uniform(1.5, 2.5)
                         typing_channel = client.get_channel(int(catch_id))
                         await typing_channel.trigger_typing()
@@ -215,16 +213,14 @@ async def on_message(message):
                 if 'wild pokémon has appeared!' in embed_title:
                     if paused:
                         if captcha_verify:
-                            typing_channel = client.get_channel(int(catch_id2))
-                            await typing_channel.trigger_typing()
+                            await message.channel.trigger_typing()
                             await asyncio.sleep(1)
                             await message.channel.send(f'Bot esta pausado pois detectou um **capctha**.\n{captcha_message}')
                     else:
                         timesleep = random.uniform(4.5, 6.0)
                         await asyncio.sleep(0)
                         if not paused:
-                            typing_channel = client.get_channel(int(catch_id2))
-                            await typing_channel.trigger_typing()
+                            await message.channel.trigger_typing()
                             await asyncio.sleep(timesleep)
                             if paused:
                                 await message.channel.send(f'Nao foi possivel concluir o catch!:red_sircle: pois um **captcha** foi dectado.\n{captcha_message}')
@@ -244,8 +240,7 @@ async def on_message(message):
                             timesleep = random.uniform(0.8, 1.8)
                             await asyncio.sleep(0)
                             if not paused:
-                                typing_channel = client.get_channel(int(catch_id2))
-                                await typing_channel.trigger_typing()
+                                await message.channel.trigger_typing()
                                 await asyncio.sleep(timesleep)
                                 await message.channel.send(f'<@716390085896962058> c {pokemon_name3}')
                     check = random.randint(1, 60)
@@ -254,7 +249,7 @@ async def on_message(message):
                     else:
                         await asyncio.sleep(1)
 
-                elif 'Congratulations' in content:
+                elif 'Congratulations' in content and not paused:
                     num_pokemon += 1
                     split = content.split(' ')
                     pokemon = split[7].replace('!', '')
@@ -266,7 +261,7 @@ async def on_message(message):
                         await asyncio.sleep(timesleep)
                         await message.channel.send('<@716390085896962058> i l')
                     pingr = random.randint(1, 30)
-                    if pingr == 1:
+                    if pingr == 1 and not paused:
                         timesleep = random.uniform(1.5, 4.5)
                         typing_channel = client.get_channel(int(catch_id2))
                         await typing_channel.trigger_typing()
@@ -278,7 +273,7 @@ async def on_message(message):
                         await typing_channel.trigger_typing()
                         await asyncio.sleep(timesleep)
                         await message.channel.send('<@716390085896962058> i l')
-                    if 'seem unusual...' in content:
+                    if 'seem unusual...' in content and not paused:
                         shiny += 1
                         print(f'Shiny Pokémon caught! Pokémon: {pokemon}')
                         print(f'Shiny: {shiny} | Legendary: {legendary} | Mythical: {mythical}')
@@ -287,7 +282,7 @@ async def on_message(message):
                         await typing_channel.trigger_typing()
                         await asyncio.sleep(timesleep)
                         await message.channel.send('<@716390085896962058> i l')
-                    elif re.findall('^' + pokemon + '$', legendary_list, re.MULTILINE):
+                    elif re.findall('^' + pokemon + '$', legendary_list, re.MULTILINE) and not paused:
                         legendary += 1
                         print(f'Legendary Pokémon caught! Pokémon: {pokemon}')
                         print(f'Shiny: {shiny} | Legendary: {legendary} | Mythical: {mythical}')
@@ -296,7 +291,7 @@ async def on_message(message):
                         await typing_channel.trigger_typing()
                         await asyncio.sleep(timesleep)
                         await message.channel.send('<@716390085896962058> i l')
-                    elif re.findall('^' + pokemon + '$', mythical_list, re.MULTILINE):
+                    elif re.findall('^' + pokemon + '$', mythical_list, re.MULTILINE) and not paused:
                         mythical += 1
                         print(f'Mythical Pokémon caught! Pokémon: {pokemon}')
                         print(f'Shiny: {shiny} | Legendary: {legendary} | Mythical: {mythical}')
@@ -305,13 +300,13 @@ async def on_message(message):
                         await typing_channel.trigger_typing()
                         await asyncio.sleep(timesleep)
                         await message.channel.send('<@716390085896962058> i l')
-                elif 'You have completed the quest' in content:
+                elif 'You have completed the quest' in content and not paused:
                         timesleep = random.uniform(1.0, 2.5)
                         typing_channel = client.get_channel(int(catch_id2))
                         await typing_channel.trigger_typing()
                         await asyncio.sleep(timesleep)
                         await message.channel.send('<@716390085896962058> q')
-                elif 'You have completed this quest track and received the' in content:
+                elif 'You have completed this quest track and received the' in content and not paused:
                         timesleep = random.uniform(1.0, 2.5)
                         typing_channel = client.get_channel(int(catch_id2))
                         await typing_channel.trigger_typing()
@@ -380,7 +375,7 @@ async def on_message(message):
                     else:
                         await asyncio.sleep(1)
 
-                elif 'Congratulations' in content:
+                elif 'Congratulations' in content and not paused:
                     num_pokemon += 1
                     split = content.split(' ')
                     pokemon = split[7].replace('!', '')
@@ -392,19 +387,19 @@ async def on_message(message):
                         await asyncio.sleep(timesleep)
                         await message.channel.send('<@716390085896962058> i l')
                     pingr3 = random.randint(1, 30)
-                    if pingr3 == 1:
+                    if pingr3 == 1 and not paused:
                         timesleep = random.uniform(1.5, 4.5)
                         typing_channel = client.get_channel(int(catch_id3))
                         await typing_channel.trigger_typing()
                         await asyncio.sleep(timesleep)
                         await message.channel.send('<@716390085896962058> ping')
-                    if f'a level 1 {pokemon}' in content:
+                    if f'a level 1 {pokemon}' in content and paused:
                         timesleep = random.uniform(0.8, 1.2)
                         typing_channel = client.get_channel(int(catch_id2))
                         await typing_channel.trigger_typing()
                         await asyncio.sleep(timesleep)
                         await message.channel.send('<@716390085896962058> i l')
-                    if 'seem unusual...' in content:
+                    if 'seem unusual...' in content and not paused:
                         shiny += 1
                         print(f'Shiny Pokémon caught! Pokémon: {pokemon}')
                         print(f'Shiny: {shiny} | Legendary: {legendary} | Mythical: {mythical}')
@@ -413,7 +408,7 @@ async def on_message(message):
                         await typing_channel.trigger_typing()
                         await asyncio.sleep(timesleep)
                         await message.channel.send('<@716390085896962058> i l')
-                    elif re.findall('^' + pokemon + '$', legendary_list, re.MULTILINE):
+                    elif re.findall('^' + pokemon + '$', legendary_list, re.MULTILINE) and not paused:
                         legendary += 1
                         print(colored(f'Legendary Pokémon caught! Pokémon: {pokemon}', 'yellow'))
                         print(f'Shiny: {shiny} | Legendary: {legendary} | Mythical: {mythical}')
@@ -422,7 +417,7 @@ async def on_message(message):
                         await typing_channel.trigger_typing()
                         await asyncio.sleep(timesleep)
                         await message.channel.send('<@716390085896962058> i l')
-                    elif re.findall('^' + pokemon + '$', mythical_list, re.MULTILINE):
+                    elif re.findall('^' + pokemon + '$', mythical_list, re.MULTILINE) and not paused:
                         mythical += 1
                         print(colored(f'Pokemon Mythical Pego : {pokemon}', 'green'))
                         print(f'Shiny: {shiny} | Legendary: {legendary} | Mythical: {mythical}')
@@ -433,19 +428,19 @@ async def on_message(message):
                         await message.channel.send('<@716390085896962058> i l')
                     else:
                         print(colored(f'{client.user.name}  -  Total Pokémon Caught: {num_pokemon} :{pokemon}', 'blue'))
-                elif 'You have completed the quest' in content:
+                elif 'You have completed the quest' in content and not paused:
                         timesleep = random.uniform(1.0, 2.5)
                         typing_channel = client.get_channel(int(catch_id3))
                         await typing_channel.trigger_typing()
                         await asyncio.sleep(timesleep)
                         await message.channel.send('<@716390085896962058> q')
-                elif 'You have completed the quest' in content:
+                elif 'You have completed the quest' in content and not paused:
                         timesleep = random.uniform(1.0, 2.5)
                         typing_channel = client.get_channel(int(catch_id3))
                         await typing_channel.trigger_typing()
                         await asyncio.sleep(timesleep)
                         await message.channel.send('<@716390085896962058> q')
-                elif 'You have completed this quest track and received the' in content:
+                elif 'You have completed this quest track and received the' in content and not paused:
                         timesleep = random.uniform(2.5, 6.5)
                         typing_channel = client.get_channel(int(catch_id3))
                         await typing_channel.trigger_typing()
