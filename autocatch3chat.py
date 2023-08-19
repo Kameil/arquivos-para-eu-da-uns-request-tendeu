@@ -1,7 +1,7 @@
 import re, os, asyncio, random, string, keep_alive, random, termcolor, subprocess
 from discord.ext import commands, tasks
 from termcolor import colored
-version = 'v1.7.4 mitada'
+version = 'v1.7.5 bug do milênio'
 
 user_token = os.environ['user_token']
 catch_id = os.environ['catch_id']
@@ -72,15 +72,8 @@ async def on_ready():
     channel = client.get_channel(int(catch_id))
     await channel.trigger_typing()
     await asyncio.sleep(2)
-    pro = random.randint(1,4)
-    if pro == 1:
-        await channel.send('autocatch online.')
-    elif pro == 2:
-        await channel.send('ac online')
-    elif pro == 3:
-        await channel.send('ac on')
-    else:
-        await channel.send('autocatch on')
+    pro = ["autocatch online.", "ac online", "ac on", "autocatch on"]
+    await channel.send(random.choice(pro))
 
 
 @client.event
