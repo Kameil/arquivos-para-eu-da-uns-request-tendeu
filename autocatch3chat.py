@@ -1,7 +1,7 @@
 import re, os, asyncio, random, string, keep_alive, random, termcolor, subprocess
 from discord.ext import commands, tasks
 from termcolor import colored
-version = 'v1.7.5 bug do milênio'
+version = 'v1.7.4 mitada'
 
 user_token = os.environ['user_token']
 catch_id = os.environ['catch_id']
@@ -53,6 +53,7 @@ def remover_acentos(palavra):
     except ImportError:
         try:
             subprocess.Popen(['pip', 'install', 'unidecode'])
+            time.sleep(5)
             from unidecode import unidecode
             return unidecode(palavra)
         except Exception as e:
