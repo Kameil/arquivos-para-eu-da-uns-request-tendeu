@@ -49,6 +49,7 @@ def remover_emojis(texto):
 def remover_acentos(palavra):
     try:
         from unidecode import unidecode
+        return unidecode(palavra)
     except ImportError:
         try:
             subprocess.Popen(['pip', 'install', 'unidecode'])
