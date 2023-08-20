@@ -141,26 +141,8 @@ async def on_message(message):
         if not message.author.bot:
             await bot.process_commands(message)
 
-def increase_resolution(image, scale_factor):
-    width, height = image.size
-    new_width = int(width * scale_factor)
-    new_height = int(height * scale_factor)
-    resized_image = image.resize((new_width, new_height), resample=Image.BICUBIC)
-    return resized_image
 
-def preprocess_image(image):
-    # Aumenta o contraste da imagem
-    enhancer = ImageEnhance.Contrast(image)
-    enhanced_image = enhancer.enhance(1.0)
 
-    # Converte para escala de cinza
-    grayscale_image = enhanced_image.convert('L')
-
-    # Aplica binarização
-    threshold = 127
-    binarized_image = grayscale_image.point(lambda p: p > threshold and 255)
-
-    return binarized_image
 
 async def buscar_unidentified_image(channel):
     global unidentified_image
