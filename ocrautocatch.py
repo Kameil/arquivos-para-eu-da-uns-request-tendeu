@@ -9,7 +9,7 @@ token = os.environ['token']
 catch_id2 = '1277'
 paused = False
 poketwo = '716390085896962058'
-pokename = '0'
+pokename = {}
 unidentified_image = 'original_image.png'
 prefix = '|||'
 embed_count = '1'
@@ -51,15 +51,15 @@ async def on_message(message):
             if 'wild pokémon has appeared!' in embed_title:
                 await message.channel.typing()
                 
-                pokename = 0
+                pokename[f"{message.channel.id}"] = 0
                 print(f'pokemons spawnados: {embed_count}')
                 embed_count += 1
                 await asyncio.sleep(10)
-                if pokename == 0:
+                if pokename.get(f"{message.channel.id}") == 0:
                     if not paused:
                         timesleep = 3
                         await asyncio.sleep(1)
-                        if pokename == 0:  # Adicionando uma verificação extra aqui
+                        if pokename.get(f"{message.channel.id}") == 0:  # Adicionando uma verificação extra aqui
                             print(f'{pokename}')
                             await message.channel.send('<@716390085896962058> h')
                         
@@ -74,7 +74,7 @@ async def on_message(message):
             # Verifica se a embed contém uma imagem
             if embed.image:
                 if not paused:
-                    pokename += 1
+                    pokename[f"{message.channel.id}"] = 1
                     image_url = embed.image.url
                     try:
                         
