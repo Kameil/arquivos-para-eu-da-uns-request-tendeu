@@ -1,6 +1,6 @@
 import re, os, asyncio, random, keep_alive, requests
 from discord.ext import commands
-from PIL import Image, ImageEnhance
+from PIL import Image
 from OCR_SPACE import ocr
 
 ocr = ocr(lang='eng', api_key=os.environ['a'], overlay=False)
