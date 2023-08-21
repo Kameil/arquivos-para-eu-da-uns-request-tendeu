@@ -108,7 +108,7 @@ async def on_message(message):
                         for i in solve(content):
                             timesleep = random.uniform(0.8, 5.5)
                             if not paused:
-                                await message.channel.trigger_typing
+                                await message.channel.trigger_typing()
                                 pokemon_name = limpar_texto(i.lower())
                                 await asyncio.sleep(timesleep)
                                 await message.channel.send(f'<@716390085896962058> c {pokemon_name}')
