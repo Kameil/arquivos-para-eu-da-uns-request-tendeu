@@ -46,7 +46,19 @@ paused = False
 
 @client.event
 async def on_ready():
-    print(f'Logged into account: {client.user.name}')
+    print(colored(f'Autocatch em execuçao em : {client.user.name}', 'black', 'on_white'))
+    try:
+        channel = client.get_channel(int(catch_id))
+        if channel:
+            await channel.trigger_typing()
+            await asyncio.sleep(2)
+            pro = ["autocatch online.", "ac online", "ac on", "autocatch on"]
+            await channel.send(random.choice(pro))
+        else:
+            print(colored(f"Nao foi possivel obter o canal: {catch_id}!", "red"))
+    except:
+        print(colored("Ocorreu um erro!", "red"))
+
 
 def remover_emojis(texto): 
      texto_sem_emojis = texto.replace('♀️', '').replace('♂️', '') 
