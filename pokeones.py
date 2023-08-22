@@ -66,8 +66,12 @@ async def on_message(message):
                     await channel.trigger_typing()
                     await asyncio.sleep(2)
                     await message.channel.send(f'{prefixo}s')
-    if not message.author.bot:
+    if message.author.id == client.user.id:
         await client.process_commands(message)
+    elif not message.author.bot:
+        await client.process_commands(message)
+    else:
+        pass
 
 
 @client.command(name='start')
