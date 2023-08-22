@@ -80,7 +80,7 @@ async def on_message(message):
 async def start_cmd(ctx):
     if ctx.channel.id == int(chat):
         global paused
-        await ctx.typing()
+        ctx.typing()
         await asyncio.sleep(1)
         if paused:
             paused = False
@@ -91,7 +91,7 @@ async def start_cmd(ctx):
 @client.command(name="stop")
 async def stop_cmd(ctx):
     if ctx.channel.id == int(chat):
-        await ctx.typing()
+        ctx.typing()
         await asyncio.sleep(1)
         if not paused:
             paused = True
