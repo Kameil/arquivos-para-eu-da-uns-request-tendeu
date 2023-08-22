@@ -8,7 +8,7 @@ paused = False
 token = os.environ['user_token']
 chat = os.environ['chat_id']
 
-client = commands.Bot(command_prefix='vdd', help_command=None)
+client = commands.Bot(command_prefix='&', help_command=None)
 esperar = [60.0, 120.0, 90.0]
 
 @tasks.loop(seconds=random.choice(esperar))
@@ -16,7 +16,7 @@ async def analize_loop():
     fast = random.randint(3,6)
     numero = 1
     channel = client.get_channel(int(chat))
-    channel.trigger_typing()
+    await channel.trigger_typing()
     await channel.send(f'{prefixo}s')
 
 @analize_loop.before_loop
@@ -41,7 +41,7 @@ async def on_message(message):
                 embed_title = message.embeds[0].title
                 embed_footer = message.embeds[0].footer
                 if embed_desc and 'You have won the Wild Battle!' in embed_desc:
-                    channel.trigger_typing()
+                    await channel.trigger_typing()
                     await asyncio.sleep(fast)
                     dangoro = random.randint(1,10)
                     if dangoro == 5:
@@ -50,20 +50,20 @@ async def on_message(message):
                         await message.channel.send(f'{prefixo}s')
                 
                 if embed_title and 'Shiny Wild Pokémon' in embed_title:
-                    channel.trigger_typing()
+                    await channel.trigger_typing()
                     await message.channel.send(f'{prefixo}master')
                 else:
                     if embed_footer and 'Send 1' in embed_footer.text:
-                        channel.trigger_typing()
+                        await channel.trigger_typing()
                         await asyncio.sleep(fast)
                         await message.channel.send('1')
                 if embed_desc and "You're already in a battle." in embed_desc:
-                    channel.trigger_typing()
+                    await channel.trigger_typing()
                     await asyncio.sleep(fast)
                     await channel.send('1')
             else:
                 if 'Keep the calm!' in message.content:
-                    channel.trigger_typing()
+                    await channel.trigger_typing()
                     await asyncio.sleep(2)
                     await message.channel.send(f'{prefixo}s')
     if not message.author.bot:
@@ -74,7 +74,7 @@ async def on_message(message):
 async def start_cmd(ctx):
     if ctx.channel.id == int(chat):
         global paused
-        ctx.trigger_typing()
+        await ctx.trigger_typing()
         await asyncio.sleep(1)
         if paused:
             paused = False
@@ -84,8 +84,9 @@ async def start_cmd(ctx):
         
 @client.command(name="stop")
 async def stop_cmd(ctx):
+    global paused
     if ctx.channel.id == int(chat):
-        ctx.trigger_typing()
+        await ctx.trigger_typing()
         await asyncio.sleep(1)
         if not paused:
             paused = True
