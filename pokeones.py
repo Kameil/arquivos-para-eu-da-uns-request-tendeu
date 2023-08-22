@@ -16,7 +16,7 @@ async def analize_loop():
     fast = random.randint(3,6)
     numero = 1
     channel = client.get_channel(int(chat))
-    channel.typing()
+    channel.trigger_typing()
     await channel.send(f'{prefixo}s')
 
 @analize_loop.before_loop
@@ -41,7 +41,7 @@ async def on_message(message):
                 embed_title = message.embeds[0].title
                 embed_footer = message.embeds[0].footer
                 if embed_desc and 'You have won the Wild Battle!' in embed_desc:
-                    channel.typing()
+                    channel.trigger_typing()
                     await asyncio.sleep(fast)
                     dangoro = random.randint(1,10)
                     if dangoro == 5:
@@ -50,26 +50,20 @@ async def on_message(message):
                         await message.channel.send(f'{prefixo}s')
                 
                 if embed_title and 'Shiny Wild Pokémon' in embed_title:
-                    channel.typing()
+                    channel.trigger_typing()
                     await message.channel.send(f'{prefixo}master')
                 else:
                     if embed_footer and 'Send 1' in embed_footer.text:
-                        try:
-                            channel.typing()
-                        except:
-                            subprocess.Popen(["pip", "install", "discord.py-self==2.0.0"])
-                            print("Ocorreu um erro ao digitar.")
-                            await asyncio.sleep(30)
-                            exit()
+                        channel.trigger_typing()
                         await asyncio.sleep(fast)
                         await message.channel.send('1')
                 if embed_desc and "You're already in a battle." in embed_desc:
-                    channel.typing()
+                    channel.trigger_typing()
                     await asyncio.sleep(fast)
                     await channel.send('1')
             else:
                 if 'Keep the calm!' in message.content:
-                    channel.typing()
+                    channel.trigger_typing()
                     await asyncio.sleep(2)
                     await message.channel.send(f'{prefixo}s')
     if not message.author.bot:
@@ -80,7 +74,7 @@ async def on_message(message):
 async def start_cmd(ctx):
     if ctx.channel.id == int(chat):
         global paused
-        ctx.typing()
+        ctx.trigger_typing()
         await asyncio.sleep(1)
         if paused:
             paused = False
@@ -91,7 +85,7 @@ async def start_cmd(ctx):
 @client.command(name="stop")
 async def stop_cmd(ctx):
     if ctx.channel.id == int(chat):
-        ctx.typing()
+        ctx.trigger_typing()
         await asyncio.sleep(1)
         if not paused:
             paused = True
@@ -105,4 +99,8 @@ async def pokeoneautospawn():
     
 keep_alive.keep_alive()
 asyncio.run(pokeoneautospawn())
+try:
+    print(discord.__version__)
+except:
+    pass
 client.run(f"{token}")
