@@ -13,11 +13,12 @@ esperar = [60.0, 120.0, 90.0]
 
 @tasks.loop(seconds=random.choice(esperar))
 async def analize_loop():
-    fast = random.randint(3,6)
-    numero = 1
-    channel = client.get_channel(int(chat))
-    await channel.trigger_typing()
-    await channel.send(f'{prefixo}s')
+    if not paused:
+        fast = random.randint(3,6)
+        numero = 1
+        channel = client.get_channel(int(chat))
+        await channel.trigger_typing()
+        await channel.send(f'{prefixo}s')
 
 @analize_loop.before_loop
 async def fazsentido():
@@ -61,11 +62,13 @@ async def on_message(message):
                     await channel.trigger_typing()
                     await asyncio.sleep(fast)
                     await channel.send('1')
+                    
             else:
                 if 'Keep the calm!' in message.content:
                     await channel.trigger_typing()
                     await asyncio.sleep(2)
                     await message.channel.send(f'{prefixo}s')
+                    
     if message.author.id == client.user.id:
         await client.process_commands(message)
     elif not message.author.bot:
