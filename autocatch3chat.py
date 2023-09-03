@@ -113,7 +113,7 @@ async def on_message(message):
             if message.embeds:
                 embed_title = message.embeds[0].title
                 if 'wild pokémon has appeared!' in embed_title:
-                    timesleep = random.uniform(1.5, 4.5)
+                    timesleep = random.uniform(1.5, 7.5)
                     await asyncio.sleep(0)
                     if not paused:
                         await message.channel.trigger_typing()
@@ -126,7 +126,7 @@ async def on_message(message):
                         print('Pokemon not found.')
                     else:
                         for i in solve(content):
-                            timesleep = random.uniform(0.8, 5.5)
+                            timesleep = random.uniform(0.8, 2.3)
                             if not paused:
                                 await message.channel.trigger_typing()
                                 pokemon_name = limpar_texto(i.lower())
