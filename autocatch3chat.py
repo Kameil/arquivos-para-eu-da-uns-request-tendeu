@@ -25,7 +25,7 @@ except:
     pass
 try:
     catch_id6 = os.environ['catch_id6']
-    catch_ids.append(catch_id5)
+    catch_ids.append(catch_id6)
 except:
     pass
 ping = os.environ['captcha_ping']
