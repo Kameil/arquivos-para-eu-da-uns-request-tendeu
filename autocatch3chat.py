@@ -188,6 +188,7 @@ async def start(ctx):
 
 @client.command()
 async def stop(ctx):
+    global paused
     if str(ctx.channel.id) in str(catch_ids):
         if not paused:
             paused = True
