@@ -4,10 +4,30 @@ from termcolor import colored
 
 version = '2.0 beta'
 
+catch_ids = []
+
 user_token = os.environ['user_token']
 catch_id = os.environ['catch_id']
+catch_ids.append(catch_id)
 catch_id2 = os.environ['catch_id2']
+catch_ids.append(catch_id2)
 catch_id3 = os.environ['catch_id3']
+catch_ids.append(catch_id3)
+try:
+    catch_id4 = os.environ['catch_id4']
+    catch_ids.append(catch_id4)
+except:
+    pass
+try:
+    catch_id5 = os.environ["catch_id5"]
+    catch_ids.append(catch_id5)
+except:
+    pass
+try:
+    catch_id6 = os.environ['catch_id6']
+    catch_ids.append(catch_id5)
+except:
+    pass
 ping = os.environ['captcha_ping']
 prefix = os.environ['prefix']
 
@@ -48,7 +68,7 @@ paused = False
 async def on_ready():
     print(colored(f'Autocatch em execuçao em : {client.user.name}', 'black', 'on_white'))
     try:
-        channel = client.get_channel(int(catch_id))
+        channel = client.get_channel(int(catch_ids[0]))
         if channel:
             await channel.trigger_typing()
             await asyncio.sleep(2)
@@ -88,7 +108,7 @@ def limpar_texto(texto):
 async def on_message(message):
     global paused
     global captcha_content
-    if message.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)]:
+    if message.channel.id in catch_ids:
         if message.author.id == poketwo:
             if message.embeds:
                 embed_title = message.embeds[0].title
@@ -153,13 +173,13 @@ async def on_message(message):
 
 @client.command()
 async def say(ctx, *, args):
-    if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)]:
+    if ctx.channel.id in catch_ids:
         await ctx.send(args)
 
 @client.command()
 async def start(ctx):
     global paused
-    if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)]:
+    if ctx.channel.id in catch_ids:
         if not paused:
             await ctx.send('Bot ja esta em Execuçao.')
         else:
@@ -168,7 +188,7 @@ async def start(ctx):
 
 @client.command()
 async def stop(ctx):
-    if ctx.channel.id in [int(catch_id), int(catch_id2), int(catch_id3)]:
+    if ctx.channel.id in catch_ids:
         if not paused:
             paused = True
             await ctx.send('Bot Pausado.')
