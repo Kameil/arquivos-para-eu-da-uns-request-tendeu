@@ -2,7 +2,7 @@ import re, os, asyncio, random, string, keep_alive, random
 from discord.ext import commands
 from termcolor import colored
 
-version = '2.6 6catchid'
+version = '2.0 beta'
 
 catch_ids = []
 
@@ -108,7 +108,7 @@ def limpar_texto(texto):
 async def on_message(message):
     global paused
     global captcha_content
-    if int(message.channel.id) in int(catch_ids):
+    if str(message.channel.id) in str(catch_ids):
         if message.author.id == poketwo:
             if message.embeds:
                 embed_title = message.embeds[0].title
@@ -173,13 +173,13 @@ async def on_message(message):
 
 @client.command()
 async def say(ctx, *, args):
-    if ctx.channel.id in int(catch_ids):
+    if str(ctx.channel.id) in str(catch_ids):
         await ctx.send(args)
 
 @client.command()
 async def start(ctx):
     global paused
-    if int(ctx.channel.id) in int(catch_ids):
+    if str(ctx.channel.id) in str(catch_ids):
         if not paused:
             await ctx.send('Bot ja esta em Execuçao.')
         else:
@@ -188,7 +188,7 @@ async def start(ctx):
 
 @client.command()
 async def stop(ctx):
-    if int(ctx.channel.id) in int(catch_ids):
+    if str(ctx.channel.id) in str(catch_ids):
         if not paused:
             paused = True
             await ctx.send('Bot Pausado.')
