@@ -2,7 +2,7 @@ import re, os, asyncio, random, string, keep_alive, random
 from discord.ext import commands
 from termcolor import colored
 
-version = '2.5 6 catch_id'
+version = '2.0 beta'
 
 catch_ids = []
 
@@ -108,7 +108,7 @@ def limpar_texto(texto):
 async def on_message(message):
     global paused
     global captcha_content
-    if message.channel.id in catch_ids:
+    if int(message.channel.id) in int(catch_ids):
         if message.author.id == poketwo:
             if message.embeds:
                 embed_title = message.embeds[0].title
@@ -173,13 +173,13 @@ async def on_message(message):
 
 @client.command()
 async def say(ctx, *, args):
-    if ctx.channel.id in catch_ids:
+    if ctx.channel.id in int(catch_ids):
         await ctx.send(args)
 
 @client.command()
 async def start(ctx):
     global paused
-    if ctx.channel.id in catch_ids:
+    if int(ctx.channel.id) in int(catch_ids):
         if not paused:
             await ctx.send('Bot ja esta em Execuçao.')
         else:
@@ -188,7 +188,7 @@ async def start(ctx):
 
 @client.command()
 async def stop(ctx):
-    if ctx.channel.id in catch_ids:
+    if int(ctx.channel.id) in int(catch_ids):
         if not paused:
             paused = True
             await ctx.send('Bot Pausado.')
@@ -206,7 +206,10 @@ async def somitada():
     print(colored(f'\nPokétwo Autocacther.\n\nsò mitada violenta.', 'black', 'on_light_cyan')) 
     print(colored(f'Versao: {version}', 'black', 'on_white')) 
     print(colored(f'o prefix do autocatch é "{prefix}".\n\nuse {prefix}ajuda para ver a lista de comandos.', 'yellow')) 
-  
+    
+
+ 
+print(catch_ids) 
 keep_alive.keep_alive() 
 asyncio.run(somitada()) 
 client.run(f"{user_token}")
