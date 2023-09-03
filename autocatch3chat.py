@@ -2,7 +2,7 @@ import re, os, asyncio, random, string, keep_alive, random
 from discord.ext import commands
 from termcolor import colored
 
-version = '2.0 beta'
+version = '2.6 6catchid'
 
 catch_ids = []
 
