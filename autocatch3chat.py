@@ -3,7 +3,7 @@ from discord.ext import commands
 from termcolor import colored
 from unidecode import unidecode
 
-version = '2.0 beta'
+version = '2.1 beta'
 
 catch_ids = []
 
