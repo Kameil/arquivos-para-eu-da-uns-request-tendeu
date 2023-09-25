@@ -1,28 +1,41 @@
-import os, requests, json
+import os
+import json
+import aiohttp
 
-a = os.environ['api_key']
+try:
+    a = os.environ['api_key']
+except KeyError:
+    os.environ['api_key'] = 'helloworld'
+    a = os.environ['api_key']
 
-def ocr_space_url(url, overlay=False, api_key=a, language='eng', timeout=60):
+# 'helloworld' E a key padrao permite 10 requests a cada 10 minutos.
 
+
+async def ocr_space_url(url: str, overlay=False, api_key: str=a, language: str='eng', timeout: float=60):
     payload = {'url': url,
                'isOverlayRequired': overlay,
                'apikey': api_key,
                'language': language,
                }
-    r = requests.post('https://api.ocr.space/parse/image', timeout=timeout,
-                      data=payload,
-                      )
-    return r.content.decode()
+    timeout = aiohttp.ClientTimeout(total=timeout)
+    async with aiohttp.ClientSession(timeout=timeout) as session:
+        async with session.post('https://api.ocr.space/parse/image', data=payload) as response:
+            return await response.text()
 
 
 
 class ocr:
-    def __init__(self, lang='eng', api_key='hello world', overlay=False):
+    def __init__(self, lang='eng', api_key='helloworld', overlay=False):
         self.language = lang
         self.api = api_key
+        self.overlay = overlay
+
         
-    def image(self, image_url, timeout=30):
-        self.to_string = ocr_space_url(url=image_url, language=self.language, overlay=False, api_key=self.api, timeout=timeout)
-        response_json = json.loads(self.to_string)
-        parsed_text = response_json['ParsedResults'][0]['ParsedText']
-        return parsed_text
+    async def image(self, image_url, timeout=30):
+        image_text = await ocr_space_url(url=image_url, language=self.language, overlay=self.overlay, api_key=self.api, timeout=timeout)
+        response_json = json.loads(image_text)
+        try:
+            parsed_text = response_json['ParsedResults'][0]['ParsedText']
+            return parsed_text
+        except KeyError:
+            return None
