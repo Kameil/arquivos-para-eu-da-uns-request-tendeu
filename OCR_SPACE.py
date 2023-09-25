@@ -32,7 +32,11 @@ class ocr:
 
         
     async def image(self, image_url, timeout=30):
-        image_text = await ocr_space_url(url=image_url, language=self.language, overlay=self.overlay, api_key=self.api, timeout=timeout)
+        image_text = await ocr_space_url(url=image_url,
+                                         language=self.language,
+                                         overlay=self.overlay,
+                                         api_key=self.api,
+                                         timeout=timeout)
         response_json = json.loads(image_text)
         try:
             parsed_text = response_json['ParsedResults'][0]['ParsedText']
