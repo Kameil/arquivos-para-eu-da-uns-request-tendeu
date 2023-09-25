@@ -24,7 +24,7 @@ async def ocr_space_url(url: str, overlay=False, api_key: str=a, language: str='
 
 
 
-class ocr:
+class Ocr:
     def __init__(self, lang='eng', api_key='helloworld', overlay=False):
         self.language = lang
         self.api = api_key
