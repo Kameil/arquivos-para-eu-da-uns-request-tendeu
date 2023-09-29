@@ -25,13 +25,13 @@ async def ocr_space_url(url: str, overlay=False, api_key: str=a, language: str='
 
 
 class Ocr:
-    def __init__(self, lang='eng', api_key='helloworld', overlay=False):
+    def __init__(self, lang: str='eng', api_key: str='helloworld', overlay=False):
         self.language = lang
         self.api = api_key
         self.overlay = overlay
 
         
-    async def image(self, image_url, timeout=30):
+    async def image(self, image_url: str, timeout: float=30):
         image_text = await ocr_space_url(url=image_url,
                                          language=self.language,
                                          overlay=self.overlay,
