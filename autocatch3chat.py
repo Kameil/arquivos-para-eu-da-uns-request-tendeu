@@ -214,7 +214,5 @@ async def somitada():
  
 print(catch_ids) 
 keep_alive.keep_alive()
-
-pokemons = requests.get()
 asyncio.run(somitada()) 
 client.run(f"{user_token}")
