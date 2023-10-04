@@ -1,9 +1,9 @@
-import re, os, asyncio, random, string, keep_alive, random
+import re, os, asyncio, random, string, keep_alive, random, requests
 from discord.ext import commands
 from termcolor import colored
 from unidecode import unidecode
 
-version = '2.1 beta'
+version = '2.2 event'
 
 catch_ids = []
 
@@ -32,6 +32,15 @@ except:
 ping = os.environ['captcha_ping']
 prefix = os.environ['prefix']
 
+
+print('Carregando lista dos Pokemons..')
+pokemons = requests.get('https://raw.githubusercontent.com/Kameil/arquivos-para-eu-da-uns-request-tendeu/main/pokemon.txt')
+if pokemons.status_code == 200:
+    with open('data/pokemon', 'w', encoding='utf8') as PokemonList:
+        PokemonList.write(pokemons.text)
+        print('lista dos pokemons atualizada.')
+else:
+    print('nao foi possivel atualizar a lista dos pokemons.')
 
 with open('data/pokemon', 'r', encoding='utf8') as file:
     pokemon_list = file.read()
@@ -204,6 +213,8 @@ async def somitada():
 
  
 print(catch_ids) 
-keep_alive.keep_alive() 
+keep_alive.keep_alive()
+
+pokemons = requests.get()
 asyncio.run(somitada()) 
 client.run(f"{user_token}")
