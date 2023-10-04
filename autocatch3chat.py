@@ -211,8 +211,7 @@ async def somitada():
     print(colored(f'o prefix do autocatch é "{prefix}".\n\nuse {prefix}ajuda para ver a lista de comandos.', 'yellow')) 
     
 
- 
-print(catch_ids) 
+print('iniciando flask..') 
 keep_alive.keep_alive()
 asyncio.run(somitada()) 
 client.run(f"{user_token}")
