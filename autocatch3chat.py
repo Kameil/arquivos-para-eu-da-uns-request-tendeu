@@ -10,27 +10,39 @@ catch_ids = []
 user_token = os.environ['user_token']
 catch_id = os.environ['catch_id']
 catch_ids.append(catch_id)
-catch_id2 = os.environ['catch_id2']
-catch_ids.append(catch_id2)
-catch_id3 = os.environ['catch_id3']
-catch_ids.append(catch_id3)
+try:
+    catch_id2 = os.environ['catch_id2']
+    catch_ids.append(catch_id2)
+except KeyError:
+    pass
+try:
+    catch_id3 = os.environ['catch_id3']
+    catch_ids.append(catch_id3)
+except KeyError:
+    pass
 try:
     catch_id4 = os.environ['catch_id4']
     catch_ids.append(catch_id4)
-except:
+except KeyError:
     pass
 try:
     catch_id5 = os.environ["catch_id5"]
     catch_ids.append(catch_id5)
-except:
+except KeyError:
     pass
 try:
     catch_id6 = os.environ['catch_id6']
     catch_ids.append(catch_id6)
-except:
+except KeyError:
     pass
-ping = os.environ['captcha_ping']
-prefix = os.environ['prefix']
+try:
+    ping = os.environ['captcha_ping']
+except KeyError:
+    ping = '0'
+try:
+    prefix = os.environ['prefix']
+except KeyError:
+    prefix = '!/'
 
 
 print('Carregando lista dos Pokemons..')
