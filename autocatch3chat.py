@@ -184,11 +184,13 @@ async def on_message(message):
     if not message.author.bot:
         await client.process_commands(message)
   
-
+"""
+Comando desativado
 @client.command()
 async def say(ctx, *, args):
     if str(ctx.channel.id) in str(catch_ids):
         await ctx.send(args)
+"""
 
 @client.command()
 async def start(ctx):
