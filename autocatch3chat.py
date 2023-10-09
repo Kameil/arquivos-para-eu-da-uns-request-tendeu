@@ -10,31 +10,15 @@ catch_ids = []
 user_token = os.environ['user_token']
 catch_id = os.environ['catch_id']
 catch_ids.append(catch_id)
-try:
-    catch_id2 = os.environ['catch_id2']
-    catch_ids.append(catch_id2)
-except KeyError:
-    pass
-try:
-    catch_id3 = os.environ['catch_id3']
-    catch_ids.append(catch_id3)
-except KeyError:
-    pass
-try:
-    catch_id4 = os.environ['catch_id4']
-    catch_ids.append(catch_id4)
-except KeyError:
-    pass
-try:
-    catch_id5 = os.environ["catch_id5"]
-    catch_ids.append(catch_id5)
-except KeyError:
-    pass
-try:
-    catch_id6 = os.environ['catch_id6']
-    catch_ids.append(catch_id6)
-except KeyError:
-    pass
+for n in range(7):
+    if n in [0, 1]:
+        pass
+    else:
+        try:
+            catch_ids.append(os.environ[f'catch_id{n}'])
+        except KeyError:
+            pass
+
 try:
     ping = os.environ['captcha_ping']
 except KeyError:
