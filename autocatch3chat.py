@@ -15,8 +15,8 @@ for n in range(7):
         pass
     else:
         try:
-            catch_ids.append(os.environ[f'catch_id{n}'])
-        except KeyError:
+            catch_ids.append(str(os.environ[f'catch_id{n}']))
+        except:
             pass
 
 try:
@@ -106,7 +106,7 @@ def limpar_texto(texto):
 async def on_message(message):
     global paused
     global captcha_content
-    if str(message.channel.id) in str(catch_ids):
+    if str(message.channel.id) in catch_ids:
         if message.author.id == poketwo:
             if message.embeds:
                 embed_title = message.embeds[0].title
@@ -179,7 +179,7 @@ async def say(ctx, *, args):
 @client.command()
 async def start(ctx):
     global paused
-    if str(ctx.channel.id) in str(catch_ids):
+    if str(ctx.channel.id) in catch_ids:
         if not paused:
             await ctx.send('Bot ja esta em Execuçao.')
         else:
@@ -189,7 +189,7 @@ async def start(ctx):
 @client.command()
 async def stop(ctx):
     global paused
-    if str(ctx.channel.id) in str(catch_ids):
+    if str(ctx.channel.id) in catch_ids:
         if not paused:
             paused = True
             await ctx.send('Bot Pausado.')
