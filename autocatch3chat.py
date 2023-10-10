@@ -195,8 +195,6 @@ async def stop(ctx):
             await ctx.send('Bot Pausado.')
         else:
             await ctx.send('Bot Ja esta pausado.')
-    else:
-        pass
       
 
 
