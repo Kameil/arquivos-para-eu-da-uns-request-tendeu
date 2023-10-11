@@ -189,21 +189,25 @@ async def say(ctx, *, args):
 async def start(ctx):
     global paused
     if str(ctx.channel.id) in catch_ids:
-        if not paused:
-            await ctx.send('Bot ja esta em Execuçao.')
-        else:
-            paused = False
-            await ctx.send('Bot Iniciado.')
+        async with ctx.typing():
+            await asyncio.sleep(random.uniform(0.5, 0.9))
+            if not paused:
+                await ctx.send('Bot ja esta em Execuçao.')
+            else:
+                paused = False
+                await ctx.send('Bot Iniciado.')
 
 @client.command()
 async def stop(ctx):
     global paused
     if str(ctx.channel.id) in catch_ids:
-        if not paused:
-            paused = True
-            await ctx.send('Bot Pausado.')
-        else:
-            await ctx.send('Bot Ja esta pausado.')
+        async with ctx.typing():
+            await asyncio.sleep(random.uniform(0.5, 0.9))
+            if not paused:
+                paused = True
+                await ctx.send('Bot Pausado.')
+            else:
+                await ctx.send('Bot Ja esta pausado.')
       
 
 
