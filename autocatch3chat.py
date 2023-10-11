@@ -122,7 +122,7 @@ async def on_message(message):
                     timesleep = random.uniform(1.5, 7.5)
                     await asyncio.sleep(0)
                     if not paused:
-                        await message.channel.trigger_typing()
+                        await message.channel.typing()
                         await asyncio.sleep(timesleep)
                         await message.channel.send('<@716390085896962058> h')
             else:
