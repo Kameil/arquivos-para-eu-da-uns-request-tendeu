@@ -1,9 +1,15 @@
+import discord, subprocess as sb
+if discord.__version__ == '1.9.2':
+    sb.run(['poetry', 'add', 'discord.py-self==2.0.0', '||', 'pip', 'install', 'discord.py-self==2.0.0'])
+    exit()
+
 import re, os, asyncio, random, string, keep_alive, random, requests
 from discord.ext import commands
 from termcolor import colored
 from unidecode import unidecode
 
-version = '2.2 event'
+
+version = '2.3 dpy-self 2.0'
 
 catch_ids = []
 
@@ -76,7 +82,7 @@ async def on_ready():
     try:
         channel = client.get_channel(int(catch_ids[0]))
         if channel:
-            await channel.trigger_typing()
+            await channel.typing()
             await asyncio.sleep(2)
             pro = ["autocatch online.", "ac online", "ac on", "autocatch on"]
             await channel.send(random.choice(pro))
@@ -126,14 +132,14 @@ async def on_message(message):
                         for i in solve(content):
                             timesleep = random.uniform(0.8, 2.3)
                             if not paused:
-                                await message.channel.trigger_typing()
+                                await message.channel.typing()
                                 pokemon_name = limpar_texto(i.lower())
                                 await asyncio.sleep(timesleep)
                                 await message.channel.send(f'<@716390085896962058> c {pokemon_name}')
                             else:
                                 if captcha:
                                     await asyncio.sleep(random.uniform(0.5,1.5))
-                                    await message.channel.trigger_typing()
+                                    await message.channel.typing()
                                     await asyncio.sleep(random.uniform(0.5, 4.5))
                                     await message.channel.send(f"autocatch esta pausado pois o Bot detectou um captcha\n{captcha_content}")
                 elif 'Congratulations' in content:
@@ -160,7 +166,7 @@ async def on_message(message):
                         print(f'Total Pokémon Caught: {num_pokemon} :{pokemon}')
                 elif 'human' in content:
                     paused = True
-                    await message.channel.trigger_typing()
+                    await message.channel.typing()
                     await asyncio.sleep(random.uniform(0.5,3.5))
                     await message.channel.send(f'<@{ping}> Captcha Detectado! Bot pausado.')
                     captcha_content = message.content
