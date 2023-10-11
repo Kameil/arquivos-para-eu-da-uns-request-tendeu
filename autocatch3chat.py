@@ -1,6 +1,8 @@
-import discord, subprocess as sb
+import discord, subprocess as sb, time
 if discord.__version__ == '1.9.2':
-    sb.run(['poetry', 'add', 'discord.py-self==2.0.0', '||', 'pip', 'install', 'discord.py-self==2.0.0'])
+    print('Atualizando discord.')
+    time.sleep(1)
+    sb.run(['pip', 'install', 'discord.py-self==2.0.0'])
     exit()
 
 import re, os, asyncio, random, string, keep_alive, random, requests
