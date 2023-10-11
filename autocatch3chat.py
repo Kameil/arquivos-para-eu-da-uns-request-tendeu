@@ -12,12 +12,12 @@ catch_id = os.environ['catch_id']
 catch_ids.append(catch_id)
 for n in range(7):
     if n in [0, 1]:
-        pass
+        continue
     else:
         try:
             catch_ids.append(str(os.environ[f'catch_id{n}']))
         except:
-            pass
+            continue
 
 try:
     ping = os.environ['captcha_ping']
