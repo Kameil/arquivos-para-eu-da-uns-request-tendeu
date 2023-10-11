@@ -3,6 +3,7 @@ if discord.__version__ == '1.9.2':
     print('Atualizando discord.')
     time.sleep(1)
     sb.run(['pip', 'install', 'discord.py-self==2.0.0'])
+    sb.run(['python3', 'main.py'])
     exit()
 
 import re, os, asyncio, random, string, keep_alive, random, requests
