@@ -7,7 +7,8 @@ if discord.__version__ == '1.9.2':
     sb.run(['pip', 'install', 'discord.py-self==2.0.0'])
     sb.run(['python3', 'main.py'])
     exit()
-
+print('iniciando flask..') 
+keep_alive.keep_alive()
 import re
 import os
 import asyncio
@@ -242,8 +243,7 @@ def Alerts():
     print(colored(f'o prefix do autocatch é "{prefix}".\n\nuse {prefix}ajuda para ver a lista de comandos.', 'yellow')) 
     
 
-print('iniciando flask..') 
-keep_alive.keep_alive()
+
 Thread(target=Alerts).start()
 try:
     client.run(f"{user_token}")
