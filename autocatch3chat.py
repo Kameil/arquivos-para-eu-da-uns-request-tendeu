@@ -20,7 +20,7 @@ from multiprocessing import Process
 from threading import Thread
 import keep_alive
 print('iniciando flask..') 
-Thread(target=keep_alive.keep_alive)
+Thread(target=keep_alive.keep_alive).start()
 
 
 version = '2.4 otmz'
