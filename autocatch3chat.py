@@ -50,8 +50,8 @@ try:
     prefix = os.environ['prefix']
 except KeyError:
     prefix = '!/'
-
-pokemon_list = None
+with open('data/pokemon', 'r', encoding='utf8') as file:
+    pokemon_list = file.read()
 
 def CarregarPokemons():
     global pokemon_list
