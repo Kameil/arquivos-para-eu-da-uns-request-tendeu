@@ -1,4 +1,6 @@
-import discord, subprocess as sb, time
+import discord
+import subprocess as sb
+import time
 if discord.__version__ == '1.9.2':
     print('Atualizando discord.')
     time.sleep(1)
@@ -6,13 +8,24 @@ if discord.__version__ == '1.9.2':
     sb.run(['python3', 'main.py'])
     exit()
 
-import re, os, asyncio, random, string, keep_alive, random, requests
+import re
+import os
+import asyncio
+import random 
+import string
+import keep_alive 
+import requests
 from discord.ext import commands
 from termcolor import colored
 from unidecode import unidecode
+from multiprocessing import process
+from threading import Thread
 
 
 version = '2.3 dpy-self 2.0'
+headers = {
+    'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Mobile Safari/537.36'
+}
 
 catch_ids = []
 
@@ -37,18 +50,28 @@ try:
 except KeyError:
     prefix = '!/'
 
+pokemon_list = None
 
-print('Carregando lista dos Pokemons..')
-pokemons = requests.get('https://raw.githubusercontent.com/Kameil/arquivos-para-eu-da-uns-request-tendeu/main/pokemon.txt')
-if pokemons.status_code == 200:
-    with open('data/pokemon', 'w', encoding='utf8') as PokemonList:
-        PokemonList.write(pokemons.text)
-        print('lista dos pokemons atualizada.')
-else:
-    print('nao foi possivel atualizar a lista dos pokemons.')
+def CarregarPokemons():
+    global pokemon_list
+    print('Carregando lista dos Pokemons..')
+    try:
+        url = 'https://raw.githubusercontent.com/Kameil/arquivos-para-eu-da-uns-request-tendeu/main/pokemon.txt'
+        pokemons = requests.get(url)
+        if pokemons.status_code == 200:
+            with open('data/pokemon', 'w', encoding='utf8') as PokemonList:
+                PokemonList.write(pokemons.text)
+                print('lista dos pokemons atualizada.')
+        else:
+            print('nao foi possivel atualizar a lista dos pokemons.')
+    except:
+        pass
+    with open('data/pokemon', 'r', encoding='utf8') as file:
+        pokemon_list = file.read()
 
-with open('data/pokemon', 'r', encoding='utf8') as file:
-    pokemon_list = file.read()
+Thread(target=CarregarPokemons).start()
+
+
 with open('data/legendary', 'r') as file:
     legendary_list = file.read()
 with open('data/mythical', 'r') as file:
@@ -213,8 +236,7 @@ async def stop(ctx):
 
       
 
-async def somitada(): 
-    await asyncio.sleep(1) 
+def Alerts(): 
     print(colored(f'\nPokétwo Autocacther.\n\nsò mitada violenta.', 'black', 'on_light_cyan')) 
     print(colored(f'Versao: {version}', 'black', 'on_white')) 
     print(colored(f'o prefix do autocatch é "{prefix}".\n\nuse {prefix}ajuda para ver a lista de comandos.', 'yellow')) 
@@ -222,5 +244,5 @@ async def somitada():
 
 print('iniciando flask..') 
 keep_alive.keep_alive()
-asyncio.run(somitada()) 
+Thread(target=Alerts).start()
 client.run(f"{user_token}")
