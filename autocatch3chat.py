@@ -22,7 +22,7 @@ from multiprocessing import process
 from threading import Thread
 
 
-version = '2.3 dpy-self 2.0'
+version = '2.4 otmz'
 headers = {
     'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Mobile Safari/537.36'
 }
