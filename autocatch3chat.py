@@ -7,6 +7,7 @@ if discord.__version__ == '1.9.2':
     sb.run(['pip', 'install', 'discord.py-self==2.0.0'])
     sb.run(['python3', 'main.py'])
     exit()
+import keep_alive
 print('iniciando flask..') 
 keep_alive.keep_alive()
 import re
@@ -14,7 +15,7 @@ import os
 import asyncio
 import random 
 import string
-import keep_alive 
+ 
 import requests
 from discord.ext import commands
 from termcolor import colored
