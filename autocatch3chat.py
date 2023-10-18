@@ -7,9 +7,6 @@ if discord.__version__ == '1.9.2':
     sb.run(['pip', 'install', 'discord.py-self==2.0.0'])
     sb.run(['python3', 'main.py'])
     exit()
-import keep_alive
-print('iniciando flask..') 
-keep_alive.keep_alive()
 import re
 import os
 import asyncio
@@ -21,6 +18,9 @@ from termcolor import colored
 from unidecode import unidecode
 from multiprocessing import Process
 from threading import Thread
+import keep_alive
+print('iniciando flask..') 
+Thread(target=keep_alive.keep_alive)
 
 
 version = '2.4 otmz'
