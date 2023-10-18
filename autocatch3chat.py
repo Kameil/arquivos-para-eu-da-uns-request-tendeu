@@ -245,4 +245,8 @@ def Alerts():
 print('iniciando flask..') 
 keep_alive.keep_alive()
 Thread(target=Alerts).start()
-client.run(f"{user_token}")
+try:
+    client.run(f"{user_token}")
+except discord.HTTPException as e:
+    if e.status == 429:
+        print(colored('Discord Recusou a Conexao com o Codigo De status: 429 too many requests.', 'red'))
