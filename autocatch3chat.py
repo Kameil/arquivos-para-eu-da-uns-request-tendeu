@@ -18,7 +18,7 @@ import requests
 from discord.ext import commands
 from termcolor import colored
 from unidecode import unidecode
-from multiprocessing import process
+from multiprocessing import Process
 from threading import Thread
 
 
