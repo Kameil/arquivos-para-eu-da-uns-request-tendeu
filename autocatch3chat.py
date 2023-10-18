@@ -15,7 +15,6 @@ import os
 import asyncio
 import random 
 import string
- 
 import requests
 from discord.ext import commands
 from termcolor import colored
