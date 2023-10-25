@@ -250,5 +250,5 @@ try:
     client.run(f"{user_token}")
 except discord.HTTPException as e:
     if e.status == 429:
-        print(colored('Discord Recusou a Conexao com o Codigo De status: 429 too many requests.', 'red'))
+        print(colored('Discord Recusou a Conexao com o Codigo De status: 429 too many requests.\n', 'red'), str(e))
         FlasK.terminate()
