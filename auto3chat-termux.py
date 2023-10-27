@@ -243,18 +243,28 @@ def SearchMain():
     print("procurando atualizaçoes para o main.py")
     response = requests.get('https://raw.githubusercontent.com/Kameil/arquivos-para-eu-da-uns-request-tendeu/main/mainauto3chat-termux.py')
     if response.status_code == 200:
-        if str(open("main.py", "r", encoding='utf-8').read()) == str(response.text.encode('utf-8')):
+        if str(open("main.py", "r", encoding='utf8').read()) == str(response.text.encode('utf-8')):
             print ("nenhuma atualizaçao encontrada.")
         else:
             print('main.py atualizado.')
         with open("main.py", "w") as file:
             file.write(response.text)
+
+
 def ProcurarAtualizaçoes():
-    time.sleep(600)
+    while True:
+        time.sleep(600)
+        for file, url in Arquivos.items():
+            response = requests.get(url)
+            if response.status_code == 200:
+                with open(file, 'w') as arch:
+                    arch.write(response.text)
+                    print(f'{file} Foi Recarregado.')
 
 
 Thread(target=SearchMain).start()
 Thread(target=Alerts).start()
+Thread(target=ProcurarAtualizaçoes).start()
 try:
     client.run(f"{user_token}")
 except discord.HTTPException as e:
