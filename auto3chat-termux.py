@@ -20,6 +20,12 @@ from multiprocessing import Process
 from threading import Thread
 
 
+Arquivos = {
+    'main.py': 'https://raw.githubusercontent.com/Kameil/arquivos-para-eu-da-uns-request-tendeu/main/mainauto3chat-termux.py',
+    'bot.py': 'https://raw.githubusercontent.com/Kameil/arquivos-para-eu-da-uns-request-tendeu/main/auto3chat-termux.py',
+    'data/pokemon': 'https://raw.githubusercontent.com/Kameil/arquivos-para-eu-da-uns-request-tendeu/main/pokemon.txt'
+}
+
 version = '2.4 otmz'
 headers = {
     'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Mobile Safari/537.36'
@@ -243,6 +249,9 @@ def SearchMain():
             print('main.py atualizado.')
         with open("main.py", "w") as file:
             file.write(response.text)
+def ProcurarAtualizaçoes():
+    time.sleep(600)
+
 
 Thread(target=SearchMain).start()
 Thread(target=Alerts).start()
@@ -254,4 +263,3 @@ except discord.HTTPException as e:
         """
         FlasK.terminate()
         """
-
