@@ -25,9 +25,8 @@ Arquivos = {
     'bot.py': 'https://raw.githubusercontent.com/Kameil/arquivos-para-eu-da-uns-request-tendeu/main/auto3chat-termux.py',
     'data/pokemon': 'https://raw.githubusercontent.com/Kameil/arquivos-para-eu-da-uns-request-tendeu/main/pokemon.txt',
     'data/legendary': 'https://raw.githubusercontent.com/Kameil/arquivos-para-eu-da-uns-request-tendeu/main/data/legendary',
-    'data/mythical': 'https://raw.githubusercontent.com/Kameil/arquivos-para-eu-da-uns-request-tendeu/main/data/mythical',
-    
-}
+    'data/mythical': 'https://raw.githubusercontent.com/Kameil/arquivos-para-eu-da-uns-request-tendeu/main/data/mythical'
+    }
 
 version = '2.4 otmz'
 headers = {
@@ -258,13 +257,13 @@ def SearchMain():
 
 def ProcurarAtualizaçoes():
     while True:
-        time.sleep(600)
         for file, url in Arquivos.items():
             response = requests.get(url)
             if response.status_code == 200:
                 with open(file, 'w') as arch:
                     arch.write(response.text)
                     print(f'{file} Foi Recarregado.')
+        time.sleep(600)
 
 
 Thread(target=SearchMain).start()
