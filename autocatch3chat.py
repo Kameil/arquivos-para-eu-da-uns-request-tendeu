@@ -18,12 +18,7 @@ from termcolor import colored
 from unidecode import unidecode
 from multiprocessing import Process
 from threading import Thread
-"""
-import keep_alive
-print('iniciando flask..') 
-FlasK = Process(target=keep_alive.keep_alive)
-FlasK.start()
-"""
+
 
 version = '2.4 otmz'
 headers = {
@@ -32,26 +27,19 @@ headers = {
 
 catch_ids = []
 
-user_token = os.environ['user_token']
-catch_id = os.environ['catch_id']
-catch_ids.append(catch_id)
-for n in range(7):
-    if n in [0, 1]:
-        continue
-    else:
-        try:
-            catch_ids.append(str(os.environ[f'catch_id{n}']))
-        except:
-            continue
+from config import user_token
+from config import catch_id
+from config import prefix
+from config import ping
+from config import catch_id2, catch_id3, catch_id4, catch_id5, catch_id6
+catch_ids.append(str(catch_id))
+catch_ids.append(str(catch_id2))
+catch_ids.append(str(catch_id3))
+catch_ids.append(str(catch_id4))
+catch_ids.append(str(catch_id5))
+catch_ids.append(str(catch_id6))
 
-try:
-    ping = os.environ['captcha_ping']
-except KeyError:
-    ping = '0'
-try:
-    prefix = os.environ['prefix']
-except KeyError:
-    prefix = '!/'
+catch_ids = [catch_id for catch_id in catch_ids if catch_id != '']
 with open('data/pokemon', 'r', encoding='utf8') as file:
     pokemon_list = file.read()
 
@@ -251,7 +239,5 @@ try:
     client.run(f"{user_token}")
 except discord.HTTPException as e:
     if e.status == 429:
-        print(colored('Discord Recusou a Conexao com o Codigo De status: 429 too many requests:\n', 'red'), str(e))
-        """
+        print(colored('Discord Recusou a Conexao com o Codigo De status: 429 too many requests.\n', 'red'), str(e))
         FlasK.terminate()
-        """
