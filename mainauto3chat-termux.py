@@ -18,7 +18,7 @@ def download_file(url, file_name):
         return True
     return False
 
-github_url = "https://raw.githubusercontent.com/Kameil/arquivos-para-eu-da-uns-request-tendeu/main/autocatch3chat.py"
+github_url = "https://raw.githubusercontent.com/Kameil/arquivos-para-eu-da-uns-request-tendeu/main/auto3chat-termux.py"
 local_file_name = "bot.py" 
 
 
