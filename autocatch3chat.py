@@ -232,8 +232,17 @@ def Alerts():
     print(colored(f'Versao: {version}', 'black', 'on_white')) 
     print(colored(f'o prefix do autocatch é "{prefix}".\n\nuse {prefix}ajuda para ver a lista de comandos.', 'yellow')) 
     
+def SearchMain():
+    time.sleep(5)
+    print("procurando atualizaçoes para o main.py")
+    response = requests.get('https://raw.githubusercontent.com/Kameil/arquivos-para-eu-da-uns-request-tendeu/main/mainauto3chat-termux.py')
+    if response.status_code == 200:
+        if open("main.py", "r", encoding='utf-8').read() != response.text.encode('utf-8'):
+            print('main.py atualizado.')
+        with open("main.py", "w") as file:
+            file.write(response.text)
 
-
+Thread(target=SearchMain).start()
 Thread(target=Alerts).start()
 try:
     client.run(f"{user_token}")
