@@ -240,20 +240,6 @@ def Alerts():
     print(colored(f'Versao: {version}', 'black', 'on_white')) 
     print(colored(f'o prefix do autocatch é "{prefix}".\n\nuse {prefix}ajuda para ver a lista de comandos.', 'yellow')) 
     
-def SearchMain():
-    time.sleep(5)
-    print("Recarregando main.py...")
-    response = requests.get(Arquivos['main.py'])
-    if response.status_code == 200:
-        if str(open("main.py", "r", encoding='utf8').read()) == str(response.text.encode('utf-8')):
-            print ("nenhuma atualizaçao encontrada.")
-        else:
-            print('main.py Recarregado.')
-        with open("main.py", "w") as file:
-            file.write(response.text)
-    else:
-        print(f'Nao Foi possivel Recarrega o main.py. codigo de status: {response.status_code}')
-
 
 def ProcurarAtualizaçoes():
     while True:
@@ -266,7 +252,6 @@ def ProcurarAtualizaçoes():
         time.sleep(600)
 
 
-Thread(target=SearchMain).start()
 Thread(target=Alerts).start()
 Thread(target=ProcurarAtualizaçoes).start()
 try:
