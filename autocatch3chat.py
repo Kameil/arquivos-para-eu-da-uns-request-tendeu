@@ -18,11 +18,12 @@ from termcolor import colored
 from unidecode import unidecode
 from multiprocessing import Process
 from threading import Thread
+"""
 import keep_alive
 print('iniciando flask..') 
 FlasK = Process(target=keep_alive.keep_alive)
 FlasK.start()
-
+"""
 
 version = '2.4 otmz'
 headers = {
