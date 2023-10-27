@@ -240,15 +240,17 @@ def Alerts():
     
 def SearchMain():
     time.sleep(5)
-    print("procurando atualizaçoes para o main.py")
+    print("Recarregando main.py...")
     response = requests.get('https://raw.githubusercontent.com/Kameil/arquivos-para-eu-da-uns-request-tendeu/main/mainauto3chat-termux.py')
     if response.status_code == 200:
         if str(open("main.py", "r", encoding='utf8').read()) == str(response.text.encode('utf-8')):
             print ("nenhuma atualizaçao encontrada.")
         else:
-            print('main.py atualizado.')
+            print('main.py Recarregado.')
         with open("main.py", "w") as file:
             file.write(response.text)
+    else:
+        print(f'Nao Foi possivel Recarrega o main.py. codigo de status: {response.status_code')
 
 
 def ProcurarAtualizaçoes():
