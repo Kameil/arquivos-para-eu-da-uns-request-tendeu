@@ -53,7 +53,7 @@ def CarregarPokemons():
     global pokemon_list
     print('Carregando lista dos Pokemons..')
     try:
-        url = 'https://raw.githubusercontent.com/Kameil/arquivos-para-eu-da-uns-request-tendeu/main/pokemon.txt'
+        url = Arquivos['data/pokemon']
         pokemons = requests.get(url)
         if pokemons.status_code == 200:
             with open('data/pokemon', 'w', encoding='utf8') as PokemonList:
@@ -241,7 +241,7 @@ def Alerts():
 def SearchMain():
     time.sleep(5)
     print("Recarregando main.py...")
-    response = requests.get('https://raw.githubusercontent.com/Kameil/arquivos-para-eu-da-uns-request-tendeu/main/mainauto3chat-termux.py')
+    response = requests.get(Arquivos['main.py'])
     if response.status_code == 200:
         if str(open("main.py", "r", encoding='utf8').read()) == str(response.text.encode('utf-8')):
             print ("nenhuma atualizaçao encontrada.")
@@ -250,7 +250,7 @@ def SearchMain():
         with open("main.py", "w") as file:
             file.write(response.text)
     else:
-        print(f'Nao Foi possivel Recarrega o main.py. codigo de status: {response.status_code')
+        print(f'Nao Foi possivel Recarrega o main.py. codigo de status: {response.status_code}')
 
 
 def ProcurarAtualizaçoes():
