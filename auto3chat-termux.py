@@ -21,11 +21,11 @@ from threading import Thread
 
 
 Arquivos = {
-    'main.py': 'https://raw.githubusercontent.com/Kameil/arquivos-para-eu-da-uns-request-tendeu/main/mainauto3chat-termux.py',
-    'bot.py': 'https://raw.githubusercontent.com/Kameil/arquivos-para-eu-da-uns-request-tendeu/main/auto3chat-termux.py',
-    'data/pokemon': 'https://raw.githubusercontent.com/Kameil/arquivos-para-eu-da-uns-request-tendeu/main/pokemon.txt',
-    'data/legendary': 'https://raw.githubusercontent.com/Kameil/arquivos-para-eu-da-uns-request-tendeu/main/data/legendary',
-    'data/mythical': 'https://raw.githubusercontent.com/Kameil/arquivos-para-eu-da-uns-request-tendeu/main/data/mythical'
+    'main.py': 'https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/main.py',
+    'bot.py': 'https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/bot.py',
+    'data/pokemon': 'https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/data/pokemon',
+    'data/legendary': 'https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/data/legendary',
+    'data/mythical': 'https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/data/mythical'
     }
 
 version = '2.5 files'
