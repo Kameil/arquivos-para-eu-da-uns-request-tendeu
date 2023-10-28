@@ -243,8 +243,11 @@ def Alerts():
     
 
 def ProcurarAtualizaçoes():
+    requisicoes = 1
     while True:
         for file, url in Arquivos.items():
+            print(f'{requisicoes} - (GET)[{url}]')
+            requisicoes += 1
             response = requests.get(url)
             if response.status_code == 200:
                 with open(file, 'w') as arch:
